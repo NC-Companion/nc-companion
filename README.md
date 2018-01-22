@@ -1,1 +1,1 @@
-# nc-companion
+# NC Companion
