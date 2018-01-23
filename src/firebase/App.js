@@ -1,28 +1,16 @@
 import React from "react";
 import faker from 'faker';
-import {auth, firebase, queries} from '../firebase'
+import {auth, firebase, queries} from './firebase'
 
 class App extends React.Component {
   state = {
     loading: true,
-    authUser: null,
-    events : []
+    authUser: null
   }
   componentDidMount() {
     queries.getAllEvents((err,res) => {
       console.log(res);
     })
-    // const data = {
-    //   title:'tech',
-    //   body:'this is tech world',
-    //   author:'tahir',
-    //   tags : null,
-    //   catagory: null,
-    //   img_url : ''
-    // }
-    // queries.postNewEvent(data, (err)=>{
-    //   console.log(err);
-    // })
     firebase.auth.onAuthStateChanged(authUser => {
       authUser 
         ? this.setState({authUser, loading: false})
