@@ -1,17 +1,32 @@
 import React from "react";
-import {auth, firebase} from '../firebase'
+import faker from 'faker';
+import {auth, firebase, queries} from '../firebase'
 
 class App extends React.Component {
   state = {
     loading: true,
     authUser: null,
+    events : []
   }
   componentDidMount() {
+    queries.getAllEvents((err,res) => {
+      console.log(res);
+    })
+    // const data = {
+    //   title:'tech',
+    //   body:'this is tech world',
+    //   author:'tahir',
+    //   tags : null,
+    //   catagory: null,
+    //   img_url : ''
+    // }
+    // queries.postNewEvent(data, (err)=>{
+    //   console.log(err);
+    // })
     firebase.auth.onAuthStateChanged(authUser => {
       authUser 
         ? this.setState({authUser, loading: false})
         : this.setState({authUser: null, loading: false})
-
     })
   }
   handleSubmit (event) {
@@ -21,13 +36,34 @@ class App extends React.Component {
     auth.signInWithEmailAndPassword(email, password)
 
   }
+  generateRandomData () {
+    for(let i = 0; i < 10;i++) {
+      const data = {
+        title:faker.fake("{{hacker.phrase}}"),
+        body:faker.fake("{{lorem.paragraphs}}"),
+        author:faker.fake("{{name.lastName}} ,{{name.firstName}}"),
+        tags : [faker.fake("{{random.words}}"),faker.fake("{{random.words}}"),faker.fake("{{random.words}}")],
+        catagory: faker.fake("{{random.word}}"),
+        img_url : faker.fake("{{random.image}}")
+      }
+      queries.postNewEvent(data, (err)=>{
+        console.log(err);
+      })      
+    }
+  }
+
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input name='email' type='email' />
-        <input name='password' type='password' />
-        <button type='submit'>Sign In!</button>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input name='email' type='email' />
+          <input name='password' type='password' />
+          <button type='submit'>Sign In!</button>
+        </form>
+        <button onClick={this.generateRandomData}>
+          Generate Fake Events 
+        </button>
+      </div>
     );
   }
 }

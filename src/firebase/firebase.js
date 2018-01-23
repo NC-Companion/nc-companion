@@ -1,5 +1,6 @@
 import * as firebase from 'firebase';
 
+
 const { NODE_ENV = 'development' } = process.env;
 
 const config = {

@@ -1,14 +1,22 @@
-import {db} from './firebase'
+import {db} from './firebase';
+// const {db} = require('./firebase');
+
 
 export const getAllEvents = (done) => {
   db.ref('/news').on("value", res => {
-    done(res.val())
+    done(null, res.val())
   });
 }
 
 export const postNewEvent = (data, done) => {
-  
+  for (let key in data) {
+    if(key !== 'img_url' && !data[key]) {
+      return done(`Please provide '${key}'`);
+    } 
+  }
+  db.ref('news').push(data);
 }
+
 
 // module.exports = {
 //   getAllData() {
@@ -34,8 +42,13 @@ export const postNewEvent = (data, done) => {
 //   deleteData(id) {
 //     db.ref(`news/${id}`).remove();
 //   },
-//   addData(data) {
-//     db.ref('news').push(data);
+//   addData(data, done) {
+//     for (let ket in data) {
+//           if(key !== 'img_url' && !data[key]) {
+//             return done(`Please provide ${key}`);
+//           } 
+//         }
+//         db.ref('news').push(data);
 //   },
 //   updateData(id, update) {
   
