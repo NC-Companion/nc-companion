@@ -1,6 +1,7 @@
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
 
-const { NODE_ENV = "development" } = process.env;
+
+const { NODE_ENV = 'development' } = process.env;
 
 const config = {
   development: {
@@ -11,7 +12,9 @@ const config = {
     storageBucket: "",
     messagingSenderId: "819341228253"
   },
-  production: {}
+  production: {
+
+  }
 };
 
 if (firebase.apps.length === 0) {
@@ -21,4 +24,7 @@ if (firebase.apps.length === 0) {
 const auth = firebase.auth();
 const db = firebase.database();
 
-export { auth, db };
+export {
+  auth,
+  db,
+}

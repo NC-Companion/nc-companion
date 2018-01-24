@@ -1,6 +1,6 @@
 import React from "react";
 import faker from 'faker';
-import {auth, firebase, queries} from '../FireBase'
+import {auth, firebase, queries} from './firebase'
 
 class App extends React.Component {
   state = {
@@ -39,10 +39,6 @@ class App extends React.Component {
     }
   }
 
-  update (){
-    queries.updateByTitle(`You can't copy the matrix without overriding the solid state FTP feed!`, '', '', 'Bradley Black');
-  }
-
   render() {
     return (
       <div>
@@ -53,9 +49,6 @@ class App extends React.Component {
         </form>
         <button onClick={this.generateRandomData}>
           Generate Fake Events 
-        </button>
-        <button onClick = {this.update}>
-        update
         </button>
       </div>
     );
