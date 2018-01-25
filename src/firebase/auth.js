@@ -1,9 +1,13 @@
-import {auth} from './firebase'
+import { auth, githubProvider } from "./firebase";
 
-export const createUserWithEmailAndPassword = (email, password) => {
-  auth.createUserWithEmailAndPassword(email, password);
-}
+export const signInWithGitHub = () => {
+  return auth.signInWithPopup(githubProvider);
+};
 
-export const signInWithEmailAndPassword = (email, password) => {
-  auth.signInWithEmailAndPassword(email, password);
-}
+export const signOut = () => {
+  return auth.signOut();
+};
+
+export const signInAdmin = (email, password) => {
+  return auth.signInWithEmailAndPassword(email, password);
+};

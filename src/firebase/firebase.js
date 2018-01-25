@@ -21,4 +21,6 @@ if (firebase.apps.length === 0) {
 const auth = firebase.auth();
 const db = firebase.database();
 
-export { auth, db };
+const githubProvider = new firebase.auth.GithubAuthProvider().addScope("repo");
+
+export { auth, db, githubProvider };
