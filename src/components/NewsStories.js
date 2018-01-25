@@ -2,14 +2,17 @@ import React from "react";
 import NewsStory from "./NewsStory";
 import FilterButtons from "./Filter-buttons";
 import NewsStoryOverlay from "./NewsStoryOverlay";
+import Header from "./Header";
+import NewsSearch from "./News-search";
 
-import { queries } from "../firebase";
+import { queries } from "../firebase/";
 
 class NewsStories extends React.Component {
   state = {
     loading: true,
     stories: [],
-    storyIndex: null
+    storyIndex: null,
+    search: ""
   };
 
   componentDidMount() {
@@ -18,7 +21,6 @@ class NewsStories extends React.Component {
         story.id = id;
         return story;
       });
-
       this.setState({ loading: false, stories });
     });
   }
@@ -26,17 +28,28 @@ class NewsStories extends React.Component {
   render() {
     const { storyIndex, stories, loading } = this.state;
     const story = stories[storyIndex];
+
+    let matches = stories.filter(story => {
+      return story.tags
+        ? `${story.tags
+            .join(" ")
+            .toLowerCase()} ${story.title.toLowerCase()}`.indexOf(
+            this.state.search
+          ) !== -1
+        : null;
+    });
+
     return (
       <section className="newsFeedBody">
+        <Header />
+        {/* render newstoryoverlay only if story index is not null */}
         <NewsStoryOverlay {...story} />
         <section className="searchFilter">
-          <section className="inputField">
-            <input className="input" type="text" placeholder="Search news..." />
-          </section>
+          <NewsSearch handleChange={this.handleChange} />
           <FilterButtons />
         </section>
         <section className="newsStories section">
-          {stories.map((story, i) => (
+          {matches.map((story, i) => (
             <NewsStory
               key={story.id}
               index={i}
@@ -48,6 +61,12 @@ class NewsStories extends React.Component {
       </section>
     );
   }
+
+  handleChange = event => {
+    this.setState({
+      search: event.target.value.toLowerCase()
+    });
+  };
 
   selectStory = storyIndex => {
     this.setState({ storyIndex });

@@ -3,33 +3,15 @@ import PT from "prop-types";
 
 class NewsStory extends React.Component {
   render() {
-    const { selectStory, title, index, imageUrl } = this.props;
+    const { selectStory, title, index, img_url } = this.props;
     return (
-      <section
-        className="newsStory"
-        onClick={() => {
-          selectStory(index),
-            (document.getElementById("overlay").style.display = "block");
-        }}
-        style={{
-          background: `linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)), url(${imageUrl})`,
-          backgroundSize: "cover"
-        }}
-      >
+      <section className="newsStory" onClick={() => {selectStory(index), (document.getElementById("overlay").style.display = "block");}}
+        style={{background: `linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)), url(${img_url})`, backgroundSize: "cover"}}>
         <section className="" style={{ height: "80%" }} />
-        <section
-          className=""
-          style={{
-            height: "20%",
-            background: "linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6))"
-          }}
-        >
-          <span
-            className="storyHeader has-text-white is-size-4"
-            style={{ marginLeft: "1vw" }}
-          >
-            {title}
-          </span>
+
+
+        <section className="newsStoryTitle">
+          <span className="storyHeader has-text-white is-size-6">{title}</span>
         </section>
       </section>
     );
