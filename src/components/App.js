@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 import Calendar from "./Calendar";
 import NewsStories from "./NewsStories";
+import CreateNews from "./CreateNews";
 
 class App extends React.Component {
   render() {
@@ -9,7 +10,8 @@ class App extends React.Component {
       <section className="main">
         {/* <Header /> */}
         {/* <NewsStories /> */}
-        <Calendar />
+        {/* <Calendar /> */}
+        <CreateNews />
       </section>
     );
   }

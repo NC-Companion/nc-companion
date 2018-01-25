@@ -10,7 +10,7 @@ body{
 .main{
     background-color: white;
     /* height: 100vh; */
-    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/pictures/IMG_8125-1.jpg');
+    /* background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/pictures/IMG_8125-1.jpg'); */
     background-size: cover;
 
 }
@@ -90,4 +90,10 @@ body{
     z-index: 4;
     /* cursor: pointer; */
     color: white;
+}
+
+.createNewsComponent{
+    width: 90%;
+    margin: auto;
+    /* background: rgba(0,0,0,0.1) */
 }
