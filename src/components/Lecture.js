@@ -1,6 +1,5 @@
 import React from "react";
 import Moment from "moment";
-import Highlight from "react-highlight";
 import Comments from "./Comments";
 import Resources from "./Resources";
 

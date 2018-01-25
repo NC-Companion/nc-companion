@@ -5,6 +5,7 @@ import Calendar from "./Calendar";
 import Home from "./Home";
 import NewsStories from "./NewsStories";
 import CreateNews from "./CreateNews";
+import Lecture from './Lecture'
 
 class App extends React.Component {
   render() {
@@ -13,7 +14,10 @@ class App extends React.Component {
         <section className="main">
           <Switch>
             <Route exact path="/" render={() => <Home />} />
-            <Route exact path="/newsfeed" render={() => <NewsStories />} />
+            <Route exact path="/home" render={() => <Home />} />
+            <Route exact path="/calendar" render={() => <Calendar />} />
+            <Route exact path="/lecture" render={() => <Lecture />} />
+            <Route exact path="/news" render={() => <NewsStories />} />
           </Switch>
         </section>
       </BrowserRouter>
