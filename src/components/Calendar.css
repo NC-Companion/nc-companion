@@ -1,0 +1,28 @@
+.calendar{
+    background-color: white;
+}
+
+.cellContent{
+    font-family: Raleway;
+    height: 100%;
+    width: 11vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.lectureDetails{
+    height: 90%;
+    overflow: hidden;
+    /* color: black */
+}
+
+.lectureTopic{
+    /* text-align: center; */
+    height: 51%;
+    overflow: hidden;
+}
+
+.lectureTutor{
+    font-weight: bold;
+    margin-top: 5%;
+}
