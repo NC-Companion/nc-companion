@@ -52,7 +52,18 @@ const queryEventsByUserId = (id) => {
 const allLecturesPerAuthor = (name) => {
   db.ref('/users').orderByChild('name').equalTo(name).on('value', res => {
     let userId = (Object.keys(res.val())).join('');
+    console.log((Object.keys(res.val())).join(''))
     queryEventsByUserId(userId)
+  })
+}
+
+// I'll calculate the mobile PNG card, that should hard drive the XSS sensor!
+const allCommentsPerLecture = (title) => {
+  db.ref('/events').orderByChild('title').equalTo(`I'll calculate the mobile PNG card, that should hard drive the XSS sensor!`).on('value', res => {
+    let eventId = (Object.keys(res.val())).join('');
+    console.log(eventId)
+    queryCommentsByEventId(`-L3mv8ZmWXY7viV-PsZa`)
+
   })
 }
 
@@ -72,11 +83,15 @@ class GitHubSignIn extends React.Component {
 
 
   componentDidMount() {
-    // allUsers();
-    allLecturesPerAuthor('McKenzie ,Tomas');
-    // allLecturesPerAuthor('Kuhlman ,Haven');
-    // allLecturesPerAuthor('Reinger ,Dion')
+    // // allUsers();
+    // // allLecturesPerAuthor('McKenzie ,Tomas');
+    // allLecturesPerAuthor('Smitham ,Jo');
+    // // allLecturesPerAuthor('Reinger ,Dion')
+    // // queryAllEvents();
 
+    // // queryAllComments();
+    // // queryCommentsByEventId(`-L3mv8ZmWXY7viV-PsZa`)
+        allCommentsPerLecture(`I'll calculate the mobile PNG card, that should hard drive the XSS sensor!`);
   }
 
   render() {
