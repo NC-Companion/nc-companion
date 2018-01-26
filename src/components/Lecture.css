@@ -1,2 +1,53 @@
+.lecture{
+    /* padding-top: 2vw; */
+    padding: 0 1vw;
+    margin: auto;
+    /* background-color: lightblue; */
+    height: 100vh;
+}
+
+.lectureHeader{
+    height: 6vh;
+}
 code {
+    display: block;
+    white-space: pre-wrap;
+    background-color: white;
+    height: 30vh;overflow-y: scroll;
+}
+
+.lectureFooter{
+    height: 45.3vh;
+    overflow-y: hidden;
+}
+
+body::-webkit-scrollbar {
+    width: 0em;
+}
+
+.height{
+    height: 43.5vh;
+}
+
+.customScroll{
+    overflow-y: scroll;
+}
+
+.customScroll::-webkit-scrollbar {
+    width: .6vw;
+}
+ 
+.customScroll::-webkit-scrollbar-thumb {
+    border-radius: 10em;
+    background-color: hsl(348, 100%, 61%);
+}
+
+.half{
+    /* background-color: lightgreen; */
+    height: 50vh;
+}
+
+.noTopBottomPadding{
+    padding-top: 0;
+    padding-bottom: 0;
 }

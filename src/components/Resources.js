@@ -4,33 +4,16 @@ class Resources extends React.Component{
     render () {
         return (
             <section className='media'>
-                <figure class="media-left">
-                    <p class="image is-64x64">
-                        <img src={''}/>
-                    </p>
-                </figure>
                 <div class="media-content">
                     <div class="content">
                         <p>
-                            <strong>Hello</strong>
-                            <small>@Thanks</small>
-                            <br/> Bye
+                            <span href={this.props.resource.link} target='_blank' className=''>{this.props.resource.title}</span>
+                            <a href={this.props.resource.link} target='_blank' className='is-pulled-right is-size-6'><i className="fas fa-link"></i></a>
                         </p>
+                        <span className='is-size-7'>
+                            {this.props.resource.body}
+                        </span>
                     </div>
-                    <nav class="level is-mobile">
-                        <div class="level-left button is-danger">
-                            <section class="level-item">
-                                <section class="icon is-small">
-                                    <i class="fas fa-thumbs-up"></i>
-                                </section>
-                            </section>
-                            <section class="level-item is-pulled-right">
-                                <section class="icon is-small has-text-white">
-                                    9
-                                </section>
-                            </section>
-                        </div>
-                    </nav>
                 </div>
             </section>
         )
