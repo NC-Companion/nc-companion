@@ -5,7 +5,7 @@ class NewsStory extends React.Component {
   render() {
     const { selectStory, title, index, img_url } = this.props;
     return (
-      <section className="newsStory" onClick={() => {selectStory(index), (document.getElementById("overlay").style.display = "block");}}
+      <section className="newsStory box" onClick={() => {selectStory(index), (document.getElementById("overlay").style.display = "block");}}
         style={{background: `linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)), url(${img_url})`, backgroundSize: "cover"}}>
         <section className="" style={{ height: "80%" }} />
 
