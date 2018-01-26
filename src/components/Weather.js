@@ -16,14 +16,14 @@ class Weather extends React.Component {
 
   render() {
     return (
-      <section className="columns">
-        <section className='date column is-two-quarters'>
-          <h1 className="title is-4">{Moment().format('dddd do MMMM YYYY HH:MM')}</h1>
+      <section className="notification is-info is-gropued">
+        <section className='control date is-two-quarters'>
+          <span className="subtitle is-4">{Moment().format('dddd do MMMM YYYY HH:MM')}</span>
         </section>
-        <section className="weather column is-two-quarters">
-          <h1 className="title is-4">{this.state.weather.main && this.state.weather.main}</h1>
+        <section className="weather control is-pulled-right is-two-quarters notification is-warning">
+          <span className="subtitle is-4">{this.state.weather.main && this.state.weather.main}</span>
           {this.state.weather.main && <img src={this.showWeatherIcon(this.state.weather.main)} />}
-          <h1 className="title is-4">{this.state.weather.temp && this.state.weather.temp}°C</h1>
+          <span className="subtitle is-4">{this.state.weather.temp && this.state.weather.temp}°C</span>
         </section>
       </section>
 

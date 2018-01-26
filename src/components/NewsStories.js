@@ -43,9 +43,9 @@ class NewsStories extends React.Component {
     });
 
     return (
-      <section className="newsFeedBody">
+      <section className="newsFeedBody height100">
         <NewsStoryOverlay/>
-        <section className='nsHolder'>
+        <section className='height100'>
           <section className="searchFilter">
             <NewsSearch handleChange={this.handleChange}/>
           </section>
