@@ -1,16 +1,16 @@
 .outline {
   background: url('/background/brushed_alu_dark_@2X.png');
-  padding: .3rem;
-  height: 80%;
+  background-size: cover;
+  padding: .8rem;
 }
 
 .boardBody {
   background: url('/background/white_plaster.png');
   color: black;
   font-family: 'Permanent Marker', cursive;
-  height: 50%;
+  overflow: hidden;
 }
 
-#heading {
-  text-decoration: underline;
+.ttdtHeader{
+  border-bottom: .1em inset gray;
 }

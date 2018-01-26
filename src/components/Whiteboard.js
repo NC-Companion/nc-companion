@@ -4,18 +4,18 @@ import './Whiteboard.css';
 class Whiteboard extends React.Component {
   render() {
     return (
-      <section className="board">
-        <section className="outline">
-          <section className="boardBody">
-            <h1 className="subtitle" id="heading">Things to do today</h1>
-              <section className="timeLine">
-            <p>Go to NorthCoders</p>
-            <p>Go to NorthCoders</p>
-            <p>Do this</p>
-            <p>9:45 - Go to Lecture</p>
-            <p>13:00 - lunch</p>
-            <p>14:00 - do some work</p>
-            </section>
+      <section className="board height100 isDanger">
+        <section className="outline height100">
+          <section className="boardBody height100 defaultPadding is-size-6">
+            <span className="subtitle is-size-4 ttdtHeader">Things to do today</span>
+            <ul className="timeLine defaultPadding">
+              <li>Go to NorthCoders</li>
+              <li>Go to NorthCoders</li>
+              <li>Do this</li>
+              <li>9:45 - Go to Lecture</li>
+              <li>13:00 - lunch</li>
+              <li>14:00 - do some work</li>
+            </ul>
           </section>
         </section>
       </section>
