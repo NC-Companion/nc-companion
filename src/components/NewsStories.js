@@ -1,11 +1,11 @@
 import React from "react";
 import NewsStory from "./NewsStory";
-import FilterButtons from "./Filter-buttons";
 import NewsStoryOverlay from "./NewsStoryOverlay";
-import Header from "./Header";
 import NewsSearch from "./News-search";
 
-import { queries } from "../firebase/";
+import {queries} from "../firebase/";
+
+import './NewsStories.css'
 
 class NewsStories extends React.Component {
   state = {
@@ -17,40 +17,41 @@ class NewsStories extends React.Component {
 
   componentDidMount() {
     queries.getAllStories(storiesById => {
-      const stories = Object.entries(storiesById).map(([id, story]) => {
-        story.id = id;
-        return story;
-      });
-      this.setState({ loading: false, stories });
+      const stories = Object
+        .entries(storiesById)
+        .map(([id, story]) => {
+          story.id = id;
+          return story;
+        });
+      this.setState({loading: false, stories});
     });
   }
   render() {
-    const { storyIndex, stories, loading } = this.state;
+    const {storyIndex, stories, loading} = this.state;
     const story = stories[storyIndex];
 
     let matches = stories.filter(story => {
       return story.tags
-        ? `${story.tags
+        ? `${story
+          .tags
           .join(" ")
-          .toLowerCase()} ${story.title.toLowerCase()}`.indexOf(
-          this.state.search) !== -1 : null;
+          .toLowerCase()} ${story
+          .title
+          .toLowerCase()}`
+          .indexOf(this.state.search) !== -1
+        : null;
     });
+
     return (
-      <section className="newsFeedBody">
-      <NewsStoryOverlay />
-        <section className="searchFilter">
-          <NewsSearch handleChange={this.handleChange} />
-          <FilterButtons />
-        </section>
-        <section className="newsStories section">
-          {matches.map((story, i) => (
-            <NewsStory
-              key={story.id}
-              index={i}
-              selectStory={this.selectStory}
-              {...story}
-            />
-          ))}
+      <section className="newsFeedBody height100">
+        <NewsStoryOverlay/>
+        <section className='height100'>
+          <section className="searchFilter">
+            <NewsSearch handleChange={this.handleChange}/>
+          </section>
+          <section className="newsStories customScroll section noMarginTB">
+            {matches.map((story, i) => (<NewsStory key={story.id} index={i} selectStory={this.selectStory} {...story}/>))}
+          </section>
         </section>
       </section>
     );
@@ -58,12 +59,15 @@ class NewsStories extends React.Component {
 
   handleChange = event => {
     this.setState({
-      search: event.target.value.toLowerCase()
+      search: event
+        .target
+        .value
+        .toLowerCase()
     });
   };
 
   selectStory = storyIndex => {
-    this.setState({ storyIndex });
+    this.setState({storyIndex});
   };
 }
 

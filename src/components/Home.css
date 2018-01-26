@@ -1,8 +1,16 @@
 
-body {
+.homeMain{
 	background: url(http://subtlepatterns.com/patterns/tileable_wood_texture.png);
-	font-family: 'Open Sans', sans-serif;
 	color: #666;
 	min-height: 500px;
+	height: 97.5vh;
 }
 
+.homeContent{
+	height: 93vh;
+}
+
+.homeSection{
+	height: 100%;
+	overflow-y: hidden;
+}
