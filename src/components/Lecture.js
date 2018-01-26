@@ -2,6 +2,8 @@ import React from "react";
 import Moment from "moment";
 import Comments from "./Comments";
 import Resources from "./Resources";
+import * as commentsQuery from '../firebase/queries/queryEvents';
+import * as resourcesQuery from '../firebase/queries/queryResources';
 
 import "./Lecture.css";
 
@@ -32,118 +34,30 @@ var result = mapped.map(function(el){
 class Lecture extends React.Component {
   state = {
     commentsVisible: true,
-    comments: [
-      {
-        user: {
-          name: "Mike Buzzington",
-          handle: "mikeBuzzBoy",
-          imageUrl: "https://vignette.wikia.nocookie.net/simpsons/images/c/c5/Homer_simpsonwoohooo.gi" +
-              "f/revision/latest?cb=20131119164522"
-        },
-        comment: {
-          body: code,
-          createdAt: Moment().format("DDMMYYYY"),
-          votes: 200
-        }
-      }, {
-        user: {
-          name: "Buz Mikeingthon",
-          handle: "BuzzGirl",
-          imageUrl: "http://31.media.tumblr.com/27d60c20e6918b2d1dd9a209df8e8370/tumblr_mzm6n0g0j31r6" +
-              "tn9jo1_500.gif"
-        },
-        comment: {
-          body: "Piss off Mike!",
-          createdAt: Moment().format("DDMMYYYY"),
-          votes: 90
-        }
-      }, {
-        user: {
-          name: "Mike Buzzington",
-          handle: "mikeBuzzBoy",
-          imageUrl: "https://vignette.wikia.nocookie.net/simpsons/images/c/c5/Homer_simpsonwoohooo.gi" +
-              "f/revision/latest?cb=20131119164522"
-        },
-        comment: {
-          body: code,
-          createdAt: Moment().format("DDMMYYYY"),
-          votes: 200
-        }
-      }, {
-        user: {
-          name: "Mike Buzzington",
-          handle: "mikeBuzzBoy",
-          imageUrl: "https://vignette.wikia.nocookie.net/simpsons/images/c/c5/Homer_simpsonwoohooo.gi" +
-              "f/revision/latest?cb=20131119164522"
-        },
-        comment: {
-          body: code,
-          createdAt: Moment().format("DDMMYYYY"),
-          votes: 200
-        }
-      }, {
-        user: {
-          name: "Mike Buzzington",
-          handle: "mikeBuzzBoy",
-          imageUrl: "https://vignette.wikia.nocookie.net/simpsons/images/c/c5/Homer_simpsonwoohooo.gi" +
-              "f/revision/latest?cb=20131119164522"
-        },
-        comment: {
-          body: code,
-          createdAt: Moment().format("DDMMYYYY"),
-          votes: 200
-        }
-      }, {
-        user: {
-          name: "Mike Buzzington",
-          handle: "mikeBuzzBoy",
-          imageUrl: "https://vignette.wikia.nocookie.net/simpsons/images/c/c5/Homer_simpsonwoohooo.gi" +
-              "f/revision/latest?cb=20131119164522"
-        },
-        comment: {
-          body: code,
-          createdAt: Moment().format("DDMMYYYY"),
-          votes: 200
-        }
-      }
-    ],
-    resources: [
-      {
-        title: 'Space',
-        body: 'The saturn is bigger than uranus.',
-        link: 'http://www.google.com'
-      }, {
-        title: 'Bikes',
-        body: 'Are bikes not just the best.',
-        link: 'http://www.google.com'
-      }, {
-        title: 'Shoes',
-        body: 'Wear shoes, they taste nice.',
-        link: 'http://www.google.com'
-      }, {
-        title: 'Fire',
-        body: 'You can\'t digest fire, I tried.',
-        link: 'http://www.google.com'
-      }, {
-        title: 'Eviction',
-        body: 'Only nice people get evicted and buy new cars in disney land.',
-        link: 'http://www.google.com'
-      }, {
-        title: 'Shoes',
-        body: 'Wear shoes, they taste nice.',
-        link: 'http://www.google.com'
-      }, {
-        title: 'Fire',
-        body: 'You can\'t digest fire, I tried.',
-        link: 'http://www.google.com'
-      }, {
-        title: 'Eviction',
-        body: 'Only nice people get evicted and buy new cars in disney land.',
-        link: 'http://www.google.com'
-      }
-    ]
+    comments: null,
+    resources: null
   };
-  s;
+
+  componentDidMount(){
+    //  TODO ID will come in as a prop to this component
+    const eventId = '-L3mv8Z_GhIw2rhN7WTQ';
+    commentsQuery.lectureData(eventId)
+      .then(lectureData => {
+        this.setState({
+          comments : lectureData
+        });
+      })
+      .catch(console.log);
+      resourcesQuery.getEventResources(eventId)
+        .then(res => {
+          this.setState({
+            resources : res
+          })
+        })
+        .catch(console.log);
+
+
+  }
   render() {
     return (
       <section className="lecture">
@@ -184,9 +98,9 @@ class Lecture extends React.Component {
                     </form>
                   </section>
                   <section className='section'>
-                    {this
-                      .state
-                      .comments
+                    {this.state.comments &&
+                      this.state
+                      .comments 
                       .map((comment, i) => (<Comments key={i} comment={comment}/>))}
                   </section>
                 </section>}
