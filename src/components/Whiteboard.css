@@ -1,0 +1,16 @@
+.outline {
+  background: url('/background/brushed_alu_dark_@2X.png');
+  padding: .3rem;
+  height: 80%;
+}
+
+.boardBody {
+  background: url('/background/white_plaster.png');
+  color: black;
+  font-family: 'Permanent Marker', cursive;
+  height: 50%;
+}
+
+#heading {
+  text-decoration: underline;
+}

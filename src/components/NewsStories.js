@@ -24,7 +24,6 @@ class NewsStories extends React.Component {
       this.setState({ loading: false, stories });
     });
   }
-
   render() {
     const { storyIndex, stories, loading } = this.state;
     const story = stories[storyIndex];
@@ -32,18 +31,13 @@ class NewsStories extends React.Component {
     let matches = stories.filter(story => {
       return story.tags
         ? `${story.tags
-            .join(" ")
-            .toLowerCase()} ${story.title.toLowerCase()}`.indexOf(
-            this.state.search
-          ) !== -1
-        : null;
+          .join(" ")
+          .toLowerCase()} ${story.title.toLowerCase()}`.indexOf(
+          this.state.search) !== -1 : null;
     });
-
     return (
       <section className="newsFeedBody">
-        <Header />
-        {/* render newstoryoverlay only if story index is not null */}
-        <NewsStoryOverlay {...story} />
+      <NewsStoryOverlay />
         <section className="searchFilter">
           <NewsSearch handleChange={this.handleChange} />
           <FilterButtons />
