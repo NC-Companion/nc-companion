@@ -60,3 +60,42 @@
   justify-content: center;
   margin-top:2.5vh;
 }
+
+.adminDetails{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.adminTitle {
+  display: flex;
+  justify-content: center;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  padding:0;
+}
+
+#emailInput {
+  margin:auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+#passwordInput {
+  margin:auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+#loginButton {
+  margin:auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 10vh;
+  justify-content: space-between;
+}

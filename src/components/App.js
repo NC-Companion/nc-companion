@@ -25,15 +25,14 @@ class App extends React.Component {
           </section>
           <section className='bodyContent'>
             <Switch>
-              <Route exact path="/" render={routerProps => (<LandingPage history={routerProps.history} />)} />
+              <Route exact path="/landingpage" render={routerProps => (<LandingPage history={routerProps.history} />)} />
               <Route path="/account" render={() => <Account authUser={authUser} />} />
               <Route path="/admin-sign-in" component={AdminSignIn} />
               <Route exact path="/home" render={() => <Home />} />
               <Route exact path="/calendar" render={() => <Calendar />} />
               <Route exact path="/lecture" render={() => <Lecture />} />
               <Route exact path="/news" render={() => <NewsStories />} />
-              <Route exact path="/sign-in" render={() => <SignIn />} />
-            
+              <Route exact path="/" render={() => <SignIn />} />            
             </Switch>
           </section>
         </section>
