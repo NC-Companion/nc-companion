@@ -78,18 +78,18 @@ class Home extends React.Component {
             </section>
             <section className='homeDashNav title'>
               <section className='homeDashButtons'>
-                <span className='button is-size-2 has-text-danger'>
+                <Link to='/calendar'><a className='button is-size-2 has-text-danger'>
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                </span>
-                <span className="button is-size-2 has-text-dark">
+                </a></Link>
+                <a target='_blank' href='http://www.github.com' className="button is-size-2 has-text-dark">
                   <i class="fab fa-github" aria-hidden="true" />
-                </span>
-                <span className="button is-size-2 has-text-danger">
+                </a>
+                <a target='_blank' href='http://www.slack.com' className="button is-size-2 has-text-danger">
                   <i class="fab fa-slack" aria-hidden="true" />
-                </span>
-                <span className="button is-size-2 has-text-dark">
+                </a>
+                <a target='_blank' href='http://www.google.co.uk' className="button is-size-2 has-text-dark">
                   <i class="fab fa-google" aria-hidden="true" />
-                </span>
+                </a>
               </section>
             </section>
             <section className="homeDashContent columns">
