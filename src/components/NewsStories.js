@@ -11,6 +11,7 @@ class NewsStories extends React.Component {
   state = {
     loading: true,
     events : [],
+    eventIndex: null,
     search: ""
   };
 
