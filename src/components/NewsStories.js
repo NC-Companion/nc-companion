@@ -11,6 +11,7 @@ class NewsStories extends React.Component {
   state = {
     loading: true,
     events : [],
+    eventIndex: null,
     search: ""
   };
 
@@ -66,10 +67,9 @@ class NewsStories extends React.Component {
         .toLowerCase()
     });
   };
-// why creATed this ? map is maping through all the stories
-  // selectStory = storyIndex => {
-  //   this.props.viewStory(this.state.stories[storyIndex]);
-  // };
+  selectEvent = eventIndex => {
+    this.setState({eventIndex});
+  };
 }
 
 export default NewsStories;
