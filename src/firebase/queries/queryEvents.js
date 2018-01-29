@@ -1,9 +1,7 @@
 import { db } from "../firebase";
 
 export const getAllEvents = done => {
-  db.ref("/events").on("value", res => {
-    done(res.val());
-  });
+  return db.ref("/events").once("value");
 };
 
 export const lectureQuery = (id) => {
