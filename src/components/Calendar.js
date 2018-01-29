@@ -2,6 +2,7 @@ import React from "react";
 import withAuthorization, { authCondition } from "./auth/withAuthorization";
 import ReactCalendar from "rc-calendar/lib/FullCalendar";
 import Select from "rc-select";
+import CalendarOverlay from './CalendarOverlay';
 import Moment from "moment";
 
 import "./Calendar.css";
@@ -17,9 +18,9 @@ const CalendarStyle = {
 
 class Calendar extends React.Component {
   state = {
-    lectures: {
+    cohortCalendar: {lectures: {
       10012018: {
-        title: "Node.js and how it has affected over several devs.",
+        title: "Why we should all use sections and not divs.",
         tutor: "Mauro"
       },
       18012018: {
@@ -38,13 +39,16 @@ class Calendar extends React.Component {
         title: "My last name is not Rider, it's Ryder!",
         tutor: "Harriett"
       }
-    }
+    }},
+    globaltCalendar: {},
+    userCalendar: {},
   };
 
   render() {
     return (
-      <section className="calendar section">
-        <section className="title">Cohort 2</section>
+      <section className="calendar">
+        <CalendarOverlay />
+        <section className="title has-text-danger">Cohort 2</section>
         <ReactCalendar
           style={CalendarStyle}
           Select={Select}
@@ -71,13 +75,16 @@ class Calendar extends React.Component {
     return (
       <section className="cellContent is-pulled-right">
         <section>{Moment(date).format("D")}</section>
-        {this.state.lectures[`${key}`] && (
+        {this.state.cohortCalendar.lectures[`${key}`] && (
           <section className="lectureDetails">
             <section className="lectureTopic">
-              {this.state.lectures[`${key}`].title}
+              {this.state.cohortCalendar.lectures[`${key}`].title}
             </section>
             <section className="lectureTutor">
-              {this.state.lectures[`${key}`].tutor}
+              <span className='is-pulled-left'>
+                <span className='cohortCalendarCount has-text-danger'>+{Object.keys(this.state.cohortCalendar).length}</span>
+              </span>
+              <span className=''>{this.state.cohortCalendar.lectures[`${key}`].tutor}</span>
             </section>
           </section>
         )}

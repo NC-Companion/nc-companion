@@ -20,32 +20,50 @@ class NewsStoryOverlay extends React.Component {
               <section className='box hero overlay-body isDark'>
 
                 <section className='hero-head title has-text-white'>
-                  {this.props.story.title}
-                  <span className='is-pulled-right is-size-1'><button class="delete" aria-label="delete" onClick={() => this.props.close()}></button></span>
+                  <section className='columns'>
+                    <section className='column is-four-fifths is-size-4'>
+                      <section>{this.props.story.title}</section>
+                      <section>{this.props.story.author.length && <span className='has-text-danger is-size-6'>
+                          By {this
+                            .props
+                            .story
+                            .author
+                            .split(',')[1]}
+                          {' '}{this
+                            .props
+                            .story
+                            .author
+                            .split(',')[0]}
+                        </span>}</section>
+                    </section>
+                    <section className='column is-one-fifths'>
+                      <span
+                        className='is-pulled-right button is-size-6 is-rounded is-danger'
+                        onClick={() => this.props.close()}>
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                      </span>
+                    </section>
+                  </section>
                 </section>
-                <section className='hero-body'></section>
+                <section className='hero-body box columns'>
+                  <section className='column'>
+                    <img src={this.props.story.img_url}/>
+                  </section>
+                  <section className='column'>
+                    <span className='section is-size-6'>{this.props.story.body}</span>
+                  </section>
+                </section>
                 <div class="hero-foot">
                   <nav class="tabs">
                     <div class="container">
                       <ul>
-                        <li class="is-active">
-                          <a>Overview</a>
-                        </li>
-                        <li>
-                          <a>Modifiers</a>
-                        </li>
-                        <li>
-                          <a>Grid</a>
-                        </li>
-                        <li>
-                          <a>Elements</a>
-                        </li>
-                        <li>
-                          <a>Components</a>
-                        </li>
-                        <li>
-                          <a>Layout</a>
-                        </li>
+                        {this.props.story.tags.length && this
+                          .props
+                          .story
+                          .tags
+                          .map(tag => <li>
+                            <a className="has-text-danger">#{tag}</a>
+                          </li>)}
                       </ul>
                     </div>
                   </nav>

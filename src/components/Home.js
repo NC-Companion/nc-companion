@@ -76,10 +76,10 @@ class Home extends React.Component {
                 <h3 className="subtitle is-size-4">You are on Week 3.</h3>
               </section>
             </section>
-            <section className="homeDashNav title">
-              <section className="homeDashButtons">
-                <span className="button is-size-2 has-text-danger">
-                  <i class="fa fa-calendar" aria-hidden="true" />
+            <section className='homeDashNav title'>
+              <section className='homeDashButtons'>
+                <span className='button is-size-2 has-text-danger'>
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                 </span>
                 <span className="button is-size-2 has-text-dark">
                   <i class="fab fa-github" aria-hidden="true" />
