@@ -22,8 +22,8 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <section className="main">
-          <section className="level">
-            <Navbar authUser={authUser} />
+          <section className="level-right">
+           <span> <Navbar authUser={authUser} /></span>
           </section>
           <section className="bodyContent">
             <Switch>

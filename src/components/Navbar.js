@@ -5,19 +5,14 @@ import SignOutButton from "./SignOutButton";
 const Navbar = ({ authUser }) => {
   return authUser ? (
     <AuthenticatedNavbar authUser={authUser} />
-  ) : (
-    <NonAuthenticatedNavbar />
-  );
+  ) : null
 };
 
-const NonAuthenticatedNavbar = () => {
-  return <nav>Not authenticated yet.</nav>;
-};
 
 const AuthenticatedNavbar = ({ authUser }) => {
   return (
-    <nav>
-      <p>Logged in as {authUser.displayName}</p>
+    <nav className="navTop">
+
       <SignOutButton />
     </nav>
   );
