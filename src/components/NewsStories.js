@@ -67,9 +67,9 @@ class NewsStories extends React.Component {
     });
   };
 // why creATed this ? map is maping through all the stories
-  // selectStory = storyIndex => {
-  //   this.props.viewStory(this.state.stories[storyIndex]);
-  // };
+  selectEvent = eventIndex => {
+    this.props.viewEvent(this.state.events[eventIndex]);
+  };
 }
 
 export default NewsStories;

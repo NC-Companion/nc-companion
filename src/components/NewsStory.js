@@ -6,7 +6,7 @@ class NewsStory extends React.Component {
     const { selectEvent, title, index, imageUrl } = this.props;
     // imageUrl is an array
     return (
-      <section className="newsStory box" onClick={() => this.props.selectStory(this.props.index)}
+      <section className="newsStory box" onClick={() => this.props.selectEvent(this.props.index)}
         style={{background: `linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)), url(${imageUrl[0]})`, backgroundSize: "cover"}}>
         <section className="" style={{ height: "80%" }} />
         <section className="newsStoryTitle">

@@ -22,19 +22,20 @@ class NewsStoryOverlay extends React.Component {
                 <section className='hero-head title has-text-white'>
                   <section className='columns'>
                     <section className='column is-four-fifths is-size-4'>
-                      <section>{this.props.story.title}</section>
-                      <section>{this.props.story.author.length && <span className='has-text-danger is-size-6'>
+                    {console.log(this.props.event)}
+                      <section>{this.props.event.title}</section>
+                      {/* <section>{this.props.event.author.length && <span className='has-text-danger is-size-6'>
                           By {this
                             .props
-                            .story
+                            .event
                             .author
                             .split(',')[1]}
                           {' '}{this
                             .props
-                            .story
+                            .event
                             .author
                             .split(',')[0]}
-                        </span>}</section>
+                        </span>}</section> */}
                     </section>
                     <section className='column is-one-fifths'>
                       <span
@@ -47,20 +48,20 @@ class NewsStoryOverlay extends React.Component {
                 </section>
                 <section className='hero-body box columns'>
                   <section className='column'>
-                    <img src={this.props.story.img_url}/>
+                    <img src={this.props.event.img_url}/>
                   </section>
                   <section className='column'>
-                    <span className='section is-size-6'>{this.props.story.body}</span>
+                    <span className='section is-size-6'>{this.props.event.body}</span>
                   </section>
                 </section>
                 <div class="hero-foot">
                   <nav class="tabs">
                     <div class="container">
                       <ul>
-                        {this.props.story.tags.length && this
+                        {this.props.event.tag.length && this
                           .props
-                          .story
-                          .tags
+                          .event
+                          .tag
                           .map(tag => <li>
                             <a className="has-text-danger">#{tag}</a>
                           </li>)}
