@@ -2,7 +2,8 @@ import React from 'react'
 import PT from "prop-types";
 
 const NewsSearch = ({handleChange}) => (
-  <section className="inputField section">
+  <section className="">
+    <section className='is-size-2 has-text-weight-bold has-text-danger'>NC <span className='has-text-white'>Companion</span></section>
     <section class="field has-addons">
       <p class="control is-expanded">
         <input

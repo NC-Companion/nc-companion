@@ -1,7 +1,18 @@
-.newsStories{
-    height: 87%;
-}
-
 .height100{
     height: 100%;
+}
+
+.newsStory{
+    border-radius: 0;
+}
+
+.eventsHolder{
+    padding: 0;
+    margin-top: 1vw;
+    padding-right: .7vw;
+    /* 720p */
+    /* height: 76.59vh; */
+    /* 1080p */
+    height: 81.59vh;
+    overflow: hidden;
 }

@@ -8,43 +8,55 @@ import fetchQuote from './api/fetchQuote'
 import YoutubeVideo from './Youtube'
 import "./Home.css";
 
-
 class Home extends React.Component {
 
   state = {
-    quote: {body: '', author: ''}
+    quote: {
+      body: '',
+      author: ''
+    }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     fetchQuote().then(res => this.setState({
-      quote: {body: res.quote, author: res.author}
-    }) )
+      quote: {
+        body: res.quote,
+        author: res.author
+      }
+    }))
   }
 
   render() {
     return (
-      <section className="homeMain defaultPadding">
-        <section className="homeContent columns">
-          <section
-            className="events homeSection column is-one-third isDark defaultPadding">
-            <NewsStories/>
+      <section className="homeMain height100">
+        <section className="homeContent columns height100">
+          <section className="homeLeft column is-one-third isDark section">
+            <section>
+              <NewsStories/>
+            </section>
           </section>
-          <section className="homeSection column is-two-third is-dark isWhite section">
-            <section className='verticalHalf'>
+          <section className="column is-two-third isWhite section">
+            <section className=''>
               <section><Weather/></section>
               <section className='defaultPadding'>
-                <h2 className="title homePageGreeting"><span className='has-text-danger'>Hello</span> Alex Campbell.</h2>
+                <h2 className="title homePageGreeting">
+                  <span className='has-text-danger'>Hello</span> Alex.</h2>
                 <h3 className="subtitle is-size-5">You are on Week 3.</h3>
-                <span className='content'><blockquote className="subtitle"><span className='is-size-5 is-italic'>{`"${this.state.quote.body}"`}</span><span className='is-size-4 has-text-weight-bold has-text-danger'>{` - ${this.state.quote.author}`}</span></blockquote></span>
+                <span className='content'>
+                  <blockquote className="subtitle">
+                    <span className='is-size-5 is-italic'>{`"${this.state.quote.body}"`}</span>
+                    <span className='is-size-4 has-text-weight-bold has-text-danger'>{` - ${this.state.quote.author}`}</span>
+                  </blockquote>
+                </span>
               </section>
             </section>
-            {/* god damn */}
-            <section className='verticalHalf columns'>
-              <section className='column is-one-third height100'>
+            <section className='columns'>
+              <section className='column is-one-third'>
+                <section className='button is-Dark'>Calendar</section>
                 <Whiteboard/>
               </section>
               <section className='column is-two-third'>
-                <YoutubeVideo />
+                {/* <YoutubeVideo /> */}
               </section>
             </section>
           </section>

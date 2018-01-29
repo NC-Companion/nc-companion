@@ -8,8 +8,6 @@ class NewsStory extends React.Component {
       <section className="newsStory box" onClick={() => {selectStory(index), (document.getElementById("overlay").style.display = "block");}}
         style={{background: `linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)), url(${img_url})`, backgroundSize: "cover"}}>
         <section className="" style={{ height: "80%" }} />
-
-
         <section className="newsStoryTitle">
           <span className="storyHeader has-text-white is-size-6">{title}</span>
         </section>

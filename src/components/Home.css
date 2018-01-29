@@ -1,16 +1,17 @@
-.homeMain{
-	height: 97.5vh;
+.homePageGreeting{
+	font-size: 4vw;
+}
+
+.events{
+	padding: 0;
 }
 
 .homeContent{
-	height: 100%;
+	overflow: hidden;
 }
 
-.homeSection{
-	height: 100%;
-	overflow-y: hidden;
-}
-
-.homePageGreeting{
-	font-size: 3vw;
+.homeLeft{
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-right: .7vw;
 }

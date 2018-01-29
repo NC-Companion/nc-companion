@@ -19,7 +19,7 @@ class Weather extends React.Component {
       <div>
         <section className="is-gropued">
           <section className='control date'>
-            <span className="subtitle is-4">{Moment().format('dddd do MMMM YYYY')}</span>
+            <span className="subtitle is-4">{Moment().format('dddd Do MMMM YYYY')}</span>
             <section className="weather control is-pulled-right">
               <span>{this.state.weather.main && <img src={this.showWeatherIcon(this.state.weather.main)}/>}</span>
               {/* <span className="subtitle is-4">{this.state.weather.main && this.state.weather.main}</span> */}

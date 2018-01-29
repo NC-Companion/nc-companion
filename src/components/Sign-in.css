@@ -1,0 +1,62 @@
+.signIn {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  height: 70%;
+  width: 50%;
+  margin:auto;
+  box-shadow: 0 14px 8px 0 rgba(0,0,0,0.08), 0 9px 16px 4px rgba(0,0,0,0.12);
+}
+
+.signInBody{
+  background-color: white;
+  margin: auto;
+  height: 80%;
+  width: 60%;
+  box-shadow: 0 14px 8px 0 rgba(0,0,0,0.08), 0 9px 16px 4px rgba(0,0,0,0.12);
+}
+
+.nclogo {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  height: 40%;
+}
+
+.signInTitle {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+#signInButton {
+  display: flex;
+  justify-content: center;
+  margin:auto;
+  background: #F76C6C;
+  box-shadow: 0 16px 18px 0 rgba(0,0,0,0.13), 0 4px 6px 0 rgba(0,0,0,0.16);
+  border-radius: 2px;
+  border: none;
+  height: 10vh;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 3vh;
+  margin-top: 6vh;
+  outline: none;
+  cursor: pointer;
+  margin-left: 20%;
+  margin-right: 20%;
+  opacity: 1;
+  transition: opacity 150ms ease-in-out;
+}
+
+#signInButton:hover {
+  opacity: 0.9;
+}
+
+.admin {
+  margin:auto;
+  display: flex;
+  justify-content: center;
+  margin-top:2.5vh;
+}

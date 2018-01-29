@@ -12,6 +12,7 @@ import Home from "./Home";
 import NewsStories from "./NewsStories";
 import CreateNews from "./CreateNews";
 import Lecture from "./Lecture";
+import SignIn from './Sign-in';
 
 class App extends React.Component {
   render() {
@@ -19,25 +20,22 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <section className="main">
-          <Navbar authUser={authUser} />
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={routerProps => (
-                <LandingPage history={routerProps.history} />
-              )}
-            />
-            <Route
-              path="/account"
-              render={() => <Account authUser={authUser} />}
-            />
-            <Route path="/admin-sign-in" component={AdminSignIn} />
-            <Route exact path="/home" render={() => <Home />} />
-            <Route exact path="/calendar" render={() => <Calendar />} />
-            <Route exact path="/lecture" render={() => <Lecture />} />
-            <Route exact path="/news" render={() => <NewsStories />} />
-          </Switch>
+          <section className='level'>
+            <Navbar authUser={authUser} />
+          </section>
+          <section className='bodyContent'>
+            <Switch>
+              <Route exact path="/" render={routerProps => (<LandingPage history={routerProps.history} />)} />
+              <Route path="/account" render={() => <Account authUser={authUser} />} />
+              <Route path="/admin-sign-in" component={AdminSignIn} />
+              <Route exact path="/home" render={() => <Home />} />
+              <Route exact path="/calendar" render={() => <Calendar />} />
+              <Route exact path="/lecture" render={() => <Lecture />} />
+              <Route exact path="/news" render={() => <NewsStories />} />
+              <Route exact path="/sign-in" render={() => <SignIn />} />
+            
+            </Switch>
+          </section>
         </section>
       </BrowserRouter>
     );

@@ -1,6 +1,5 @@
 import React from "react";
 import NewsStory from "./NewsStory";
-import NewsStoryOverlay from "./NewsStoryOverlay";
 import NewsSearch from "./News-search";
 
 import {queries} from "../firebase/";
@@ -43,15 +42,12 @@ class NewsStories extends React.Component {
     });
 
     return (
-      <section className="newsFeedBody height100">
-        <NewsStoryOverlay/>
-        <section className='height100'>
-          <section className="searchFilter">
-            <NewsSearch handleChange={this.handleChange}/>
-          </section>
-          <section className="newsStories customScroll section noMarginTB">
-            {matches.map((story, i) => (<NewsStory key={story.id} index={i} selectStory={this.selectStory} {...story}/>))}
-          </section>
+      <section className="newsFeedBody">
+        <section className="searchFilter">
+          <NewsSearch handleChange={this.handleChange}/>
+        </section>
+        <section className='eventsHolder section customScroll'>
+          {matches.map((story, i) => (<NewsStory key={story.id} index={i} selectStory={this.selectStory} {...story}/>))}
         </section>
       </section>
     );
