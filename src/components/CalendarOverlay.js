@@ -1,5 +1,5 @@
 import React from "react";
-import PT from "prop-types";
+import Moment from 'moment';
 
 import './CalendarOverlay.css'
 
@@ -22,12 +22,12 @@ class CalendarOverlay extends React.Component {
                                 <section className='hero-head title has-text-white'>
                                     <section className='columns'>
                                         <section className='column is-four-fifths is-size-4'>
-                                            <section>Tuesday 4th July 2018</section>
+                                            <section>{Moment(this.props.date).format('dddd Do MMMM YYYY')}</section>
                                         </section>
                                         <section className='column is-one-fifths'>
                                             <span
                                                 className='is-pulled-right button is-size-6 is-rounded is-danger'
-                                                onClick={() => this.props.close()}>
+                                                onClick={() => this.props.onDeselect()}>
                                                 <i class="fa fa-times" aria-hidden="true"></i>
                                             </span>
                                         </section>
@@ -37,7 +37,7 @@ class CalendarOverlay extends React.Component {
                                     <section
                                         className='section is-size-6 customScroll'
                                         style={{
-                                        height: '60vh'
+                                        height: '60vh', paddingTop: '0', paddingBottom: '0'
                                     }}>
                                         <span className='box'></span>
                                         <span className='box notification is-warning'>I am Mitch</span>

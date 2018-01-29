@@ -18,6 +18,7 @@ const CalendarStyle = {
 
 class Calendar extends React.Component {
   state = {
+    CalOverlay: '',
     cohortCalendar: {lectures: {
       10012018: {
         title: "Why we should all use sections and not divs.",
@@ -47,7 +48,7 @@ class Calendar extends React.Component {
   render() {
     return (
       <section className="calendar">
-        <CalendarOverlay />
+        {this.state.CalOverlay && <CalendarOverlay date={this.state.CalOverlay} onDeselect={this.onDeselect} />}
         <section className="title has-text-danger">Cohort 2</section>
         <ReactCalendar
           style={CalendarStyle}
@@ -62,8 +63,12 @@ class Calendar extends React.Component {
   }
 
   onSelect = date => {
-    alert(JSON.stringify(date));
+    this.setState({CalOverlay: date})
   };
+
+  onDeselect = () => {
+    this.setState({CalOverlay: ''})
+  }
 
   isDisabled = date => {
     // console.log(date) const nonDisabledDays = Object.keys(this.state.lectures)
