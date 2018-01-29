@@ -15,3 +15,13 @@
 	padding-bottom: 0;
 	padding-right: .7vw;
 }
+
+.homeDashButtons{
+	display: flex;
+	justify-content: space-around;
+	height: 20%;
+}
+
+.homeDashContent{
+	height: 60%;
+}

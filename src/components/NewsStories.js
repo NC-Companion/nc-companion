@@ -63,7 +63,7 @@ class NewsStories extends React.Component {
   };
 
   selectStory = storyIndex => {
-    this.setState({storyIndex});
+    this.props.viewStory(this.state.stories[storyIndex]);
   };
 }
 

@@ -5,11 +5,11 @@ class NewsStory extends React.Component {
   render() {
     const { selectStory, title, index, img_url } = this.props;
     return (
-      <section className="newsStory box" onClick={() => {selectStory(index), (document.getElementById("overlay").style.display = "block");}}
-        style={{background: `linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)), url(${img_url})`, backgroundSize: "cover"}}>
+      <section className="newsStory box" onClick={() => this.props.selectStory(this.props.index)}
+        style={{background: `linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)), url(${img_url})`, backgroundSize: "cover"}}>
         <section className="" style={{ height: "80%" }} />
         <section className="newsStoryTitle">
-          <span className="storyHeader has-text-white is-size-6">{title}</span>
+          <span className="storyHeader has-text-white is-size-5 has-text-weight-bold">{title}</span>
         </section>
       </section>
     );

@@ -1,34 +1,59 @@
 import React from "react";
 import PT from "prop-types";
 
+import './NewsStoryOverlay.css'
+
 class NewsStoryOverlay extends React.Component {
   render() {
-    const { title, img_url, author, tags, body } = this.props;
+    const {title, img_url, author, tags, body} = this.props;
     return (
-      <section id="overlay" className="">
-          <span className="quit is-pulled-right button is-rounded is-outlined is-danger" onClick={() => (document.getElementById("overlay").style.display = "none")}>
-              <i className="fa fa-times is-size-4" aria-hidden="true" />
-          </span>
-          <section id="overlayTitle" className="title has-text-danger">
-          {title}
-          </section>
-          <section className="overlayImage">
-            <img src={img_url} alt="news" style={{ margin: "auto", maxHeight: "50vh" }} />
-          </section>
-          <section className="overlayBody has-text-white">
-            {body}
-          </section>
-          <section id="author" className="subtitle is-size-6 has-text-white">
-            By: {author || "NC Admin"}
-          </section>
-          <section className="tags">
-          {tags && tags.map((tag, i ) => {
-            return <section className="button is-primary is-rounded is-outlined" id="singleTag" key={i}>
-            #{tag}
-          </section>
-          })}
-          </section>
-        
+      <section className="overlayBody">
+        <section class="hero overlay-hero is-medium">
+          <div class="hero-head">
+            <nav class="navbar">
+              <div class="container has-text-centered"></div>
+            </nav>
+          </div>
+
+          <div class="hero-body">
+            <div class="container has-text-left">
+              <section className='box hero overlay-body isDark'>
+
+                <section className='hero-head title has-text-white'>
+                  {this.props.story.title}
+                  <span className='is-pulled-right is-size-1'><button class="delete" aria-label="delete" onClick={() => this.props.close()}></button></span>
+                </section>
+                <section className='hero-body'></section>
+                <div class="hero-foot">
+                  <nav class="tabs">
+                    <div class="container">
+                      <ul>
+                        <li class="is-active">
+                          <a>Overview</a>
+                        </li>
+                        <li>
+                          <a>Modifiers</a>
+                        </li>
+                        <li>
+                          <a>Grid</a>
+                        </li>
+                        <li>
+                          <a>Elements</a>
+                        </li>
+                        <li>
+                          <a>Components</a>
+                        </li>
+                        <li>
+                          <a>Layout</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </nav>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
       </section>
     );
   }

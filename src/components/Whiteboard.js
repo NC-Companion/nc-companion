@@ -6,15 +6,10 @@ class Whiteboard extends React.Component {
     return (
       <section className="board height100 isDanger">
         <section className="outline height100">
-          <section className="boardBody height100 defaultPadding is-size-6">
-            <span className="subtitle is-size-4 ttdtHeader">Things to do today</span>
+          <section className="boardBody height100 defaultPadding is-size-4 customScroll">
+            <span className="subtitle is-size-3 ttdtHeader">Things to do today</span>
             <ul className="timeLine defaultPadding">
-              <li>Go to NorthCoders</li>
-              <li>Go to NorthCoders</li>
-              <li>Do this</li>
-              <li>9:45 - Go to Lecture</li>
-              <li>13:00 - lunch</li>
-              <li>14:00 - do some work</li>
+              {this.props.content.map(item => <li>{item.time} - {item.body}</li>)}
             </ul>
           </section>
         </section>
