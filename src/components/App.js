@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PT from "prop-types";
 
+import * as routes from "../constants/routes";
+
 import withAuthentication from "./auth/withAuthentication";
 import Navbar from "./Navbar";
 import LandingPage from "./LandingPage";
@@ -12,7 +14,7 @@ import Home from "./Home";
 import NewsStories from "./NewsStories";
 import CreateNews from "./CreateNews";
 import Lecture from "./Lecture";
-import SignIn from './Sign-in';
+import SignInForm from "./SignInForm";
 
 class App extends React.Component {
   render() {
@@ -20,19 +22,34 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <section className="main">
-          <section className='level'>
+          <section className="level">
             <Navbar authUser={authUser} />
           </section>
-          <section className='bodyContent'>
+          <section className="bodyContent">
             <Switch>
-              <Route exact path="/landingpage" render={routerProps => (<LandingPage history={routerProps.history} />)} />
-              <Route path="/account" render={() => <Account authUser={authUser} />} />
-              <Route path="/admin-sign-in" component={AdminSignIn} />
-              <Route exact path="/home" render={() => <Home />} />
-              <Route exact path="/calendar" render={() => <Calendar />} />
-              <Route exact path="/lecture" render={() => <Lecture />} />
-              <Route exact path="/news" render={() => <NewsStories />} />
-              <Route exact path="/" render={() => <SignIn />} />            
+              <Route
+                path={routes.account}
+                render={() => <Account authUser={authUser} />}
+              />
+              <Route
+                exact
+                path={routes.home}
+                render={() => <Home authUser={authUser} />}
+              />
+              <Route exact path={routes.calendar} 
+                render={() => <Calendar authUser={authUser} />} 
+              />
+              <Route exact path={routes.lecture} 
+                render={() => <Lecture authUser={authUser} />} 
+              />
+              <Route exact path={routes.news} render={() => <NewsStories />} />
+              <Route
+                exact
+                path={routes.root}
+                render={routerProps => (
+                  <SignInForm history={routerProps.history} />
+                )}
+              />
             </Switch>
           </section>
         </section>

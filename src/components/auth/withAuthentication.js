@@ -19,11 +19,7 @@ const withAuthentication = Component => {
       const { loading, authUser } = this.state;
       return (
         <div>
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
-            <Component authUser={this.state.authUser} />
-          )}
+          {loading ? <p>Loading...</p> : <Component authUser={authUser} />}
         </div>
       );
     }

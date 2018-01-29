@@ -4,6 +4,7 @@ import Comments from "./Comments";
 import Resources from "./Resources";
 import * as commentsQuery from '../firebase/queries/queryEvents';
 import * as resourcesQuery from '../firebase/queries/queryResources';
+import withAuthorization, { authCondition } from "./auth/withAuthorization";
 
 import "./Lecture.css";
 
@@ -118,4 +119,4 @@ class Lecture extends React.Component {
   }
 }
 
-export default Lecture;
+export default withAuthorization(authCondition)(Lecture);

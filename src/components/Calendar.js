@@ -1,4 +1,5 @@
 import React from "react";
+import withAuthorization, { authCondition } from "./auth/withAuthorization";
 import ReactCalendar from "rc-calendar/lib/FullCalendar";
 import Select from "rc-select";
 import Moment from "moment";
@@ -85,4 +86,4 @@ class Calendar extends React.Component {
   };
 }
 
-export default Calendar;
+export default withAuthorization(authCondition)(Calendar);

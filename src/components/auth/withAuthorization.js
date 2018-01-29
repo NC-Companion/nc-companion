@@ -2,6 +2,7 @@ import React from "react";
 import PT from "prop-types";
 import { withRouter } from "react-router-dom";
 
+import * as routes from "../../constants/routes";
 import { firebase } from "../../firebase";
 
 const withAuthorization = authCondition => Component => {
@@ -9,7 +10,7 @@ const withAuthorization = authCondition => Component => {
     componentDidMount() {
       firebase.auth.onAuthStateChanged(authUser => {
         if (!authCondition(authUser)) {
-          this.props.history.push("/");
+          this.props.history.push(routes.root);
         }
       });
     }
