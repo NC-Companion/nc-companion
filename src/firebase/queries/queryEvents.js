@@ -21,11 +21,13 @@ export const lectureData = (eventId) => {
               const user = {
                 name : snap.val().name,
                 handle : snap.val().handle,
-                imageUrl : snap.val().avatarUrl
+                imageUrl : snap.val().avatarUrl,
+                id : res[key].userId
               }
               const comment = {
+                id : key,
                 body : res[key].body,
-                createdAt : res[key].craetionDate,
+                createdAt : res[key].creationDate,
                 votes : res[key].votes
               }
               comments.push({user,comment});

@@ -1,31 +1,17 @@
 import { db } from "../firebase";
-export const addNewUser = (data, done) => {
-  for (let key in data) {
-    if(key !== 'avatarUrl' && !data[key]) {
-      return done(`Please provide '${key}'`)
-    }
+import * as queryUsers from '../queries/queryUsers';
+
+
+export const addNewUser = (id, data) => {
+  if(id && data)  {
+    return db.ref('/users').child(id).set(data);
   }
-  db.ref('/users').push(data);
 }
-
-// export const updateById = (id, update) => {
-//   db.ref('/users').orderByChild('id').equalTo(title).once('value', (res) => {
-//     let newsKey = Object.keys(res.val()).join('')
-//     let newsValues = res.val();
-//     db.ref(`stories/${newsKey}`).set({
-//       title:    updateStory.newTitle     || newsValues[newsKey].title,
-//       body:     updateStory.newBody      || newsValues[newsKey].body,
-//       author:   updateStory.newAuthor    || newsValues[newsKey].author,
-//       tags:     updateStory.newTags      || newsValues[newsKey].tags,
-//       catagory: updateStory.newCatagory  || newsValues[newsKey].catagory,
-//       imgageUrl:  updateStory.newImg     || newsValues[newsKey].img_url
-//     });
-//   })
-//   db.ref('news').orderByChild('title').equalTo(title).once('value', (res) => {
-//     console.log(res.val())
-//   })
-// }
-
-export const deleteStory = (id) => {
-
+export const updateUser = (userId, update) => {  
+  return Promise.all(Object.keys(update).map(key => {
+    return db.ref('/users').child(userId).update({key:update[key]});  
+  }));
+}
+export const deleteUser = (userId) => {
+  return db.ref("/users").child(userId).remove();
 }

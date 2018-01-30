@@ -6,3 +6,7 @@ export const getAllComments = done => {
   });
 };
 
+export const getCommentById = (id) => {
+  return db.ref("/comments").child(id).once("value");
+};
+

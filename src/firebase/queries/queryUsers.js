@@ -6,6 +6,8 @@ export const getAllUsers = done => {
   });
 };
 
-
+export const getUserById = (id) => {
+  return db.ref("/users").child(id).once('value');
+}
 
 

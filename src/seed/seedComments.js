@@ -8,7 +8,7 @@ const randomCommentGenerator = () => {
       userId :faker.fake("{{random.uuid}}"),    
       body :faker.fake("{{lorem.paragraphs}}"),
       votes :faker.fake("{{random.number}}"),      
-      craetionDate : new Date(Date.now()).toISOString()
+      creationDate : new Date(Date.now()).toISOString()
     }
     ref.postNewComment(data, (err)=>{
       console.log(err);

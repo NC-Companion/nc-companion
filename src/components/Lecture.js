@@ -2,9 +2,11 @@ import React from "react";
 import Moment from "moment";
 import Comments from "./Comments";
 import Resources from "./Resources";
+import PostComments from "./Post-comments";
 import * as commentsQuery from '../firebase/queries/queryEvents';
 import * as resourcesQuery from '../firebase/queries/queryResources';
 import withAuthorization, { authCondition } from "./auth/withAuthorization";
+import * as CommentRef from '../firebase/refs/commentsRef';
 
 import "./Lecture.css";
 
@@ -36,32 +38,18 @@ class Lecture extends React.Component {
   state = {
     commentsVisible: true,
     comments: null,
-    resources: null
+    resources: null,
+    eventId : '-L3mv8Z_GhIw2rhN7WTQ'
   };
 
   componentDidMount(){
-    //  TODO ID will come in as a prop to this component
-    const eventId = '-L3mv8Z_GhIw2rhN7WTQ';
-    commentsQuery.lectureData(eventId)
-      .then(lectureData => {
-        this.setState({
-          comments : lectureData
-        });
-      })
-      .catch(console.log);
-      resourcesQuery.getEventResources(eventId)
-        .then(res => {
-          this.setState({
-            resources : res
-          })
-        })
-        .catch(console.log);
-
-
+    this.fetchComments()
   }
+  
   render() {
     return (
       <section className="lecture">
+      {console.log(this.props.authUser.uid)}
         <section className='half section'>
           <section className="lectureHeader title">
             Node.js<span className="is-pulled-right subtitle has-text-danger">
@@ -93,16 +81,11 @@ class Lecture extends React.Component {
                       .map((resource, i) => (<Resources key={i} resource={resource}/>))}</section>
                 : <section className='customScroll height'>
                   <section className='container'>
-                    <form className='field is-grouped'>
-                      <section className='control is-expanded'><textarea className='input' placeholder='write a comment...'/></section>
-                      <button className='control button is-pulled-right is-danger' type='submit'>Post comment</button>
-                    </form>
+                  <PostComments fetchComments={this.fetchComments} eventId={this.state.eventId} userId = {this.props.authUser.uid} />
                   </section>
                   <section className='section'>
                     {this.state.comments &&
-                      this.state
-                      .comments 
-                      .map((comment, i) => (<Comments key={i} comment={comment}/>))}
+                      this.state.comments.sort((a, b) => ( new Date(b.comment.createdAt) - new Date(a.comment.createdAt))).map((comment, i) => (<Comments deleteUserComment={this.deleteUserComment} key={i} index={i} comment={comment}/>))}
                   </section>
                 </section>}
             </section>
@@ -111,6 +94,36 @@ class Lecture extends React.Component {
       </section>
     );
   }
+
+  fetchComments = () => {
+    commentsQuery.lectureData(this.state.eventId)
+      .then(lectureData => {
+        this.setState({
+          comments : lectureData
+        });
+      })
+      .catch(console.log);
+      resourcesQuery.getEventResources(this.state.eventId)
+        .then(res => {
+          this.setState({
+            resources : res
+          })
+        })
+        .catch(console.log);
+  }
+
+  deleteUserComment = (commentIndex) => {
+    if (this.state.comments[commentIndex].user.id === this.props.authUser.uid) {
+    CommentRef.deleteComment(this.state.comments[commentIndex].comment.id, this.props.authUser.uid)
+      .then(res => {
+        this.setState({
+          comments: this.state.comments.filter((comment, i) => i !== commentIndex)
+        })
+      })
+      .catch(console.log)
+  }
+}
+
 
   toggleView = bool => {
     if (this.state.commentsVisible !== bool) {

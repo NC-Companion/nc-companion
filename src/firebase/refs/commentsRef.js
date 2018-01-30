@@ -1,38 +1,37 @@
 import { db } from "../firebase";
+import * as queryComments from '../queries/queryComments';
 
 export const postNewComment = (data, done) => {
   for (let key in data) {
-    if(!data[key]) {
+    if(data[key] === null) {
       return done(`Please provide '${key}'`)
     }
   }
   db.ref('/comments').push(data);
+  return done('Success');
+}
+export const voteComment = (commentId) => {
+  queryComments.getCommentById(commentId)
+    .then(snap => {
+      let currentVotes = snap.val().votes;
+      db.ref("/comments").child(commentId).update({votes:currentVotes + 1});
+    })
+    .catch(console.log);
 }
 
-// export const updateCommentByTitle = (title, update) => {
-//   db.ref('comments').orderByChild('title').equalTo(title).once('value', (res) => {
-//     let newsKey = Object.keys(res.val()).join('')
-//     let newsValues = res.val();
-//     db.ref(`comments/${newsKey}`).set({
-//       eventId :faker.fake("{{random.uuid}}"),
-//       userId :faker.fake("{{random.uuid}}"),    
-//       body :faker.fake("{{lorem.paragraphs}}"),
-//       votes :faker.fake("{{random.number}}"),      
-//       craetionDate : new Date(Date.now()).toISOString()
-//       title:    updateStory.newTitle     || newsValues[newsKey].title,
-//       body:     updateStory.newBody      || newsValues[newsKey].body,
-//       author:   updateStory.newAuthor    || newsValues[newsKey].author,
-//       tags:     updateStory.newTags      || newsValues[newsKey].tags,
-//       catagory: updateStory.newCatagory  || newsValues[newsKey].catagory,
-//       imgageUrl:  updateStory.newImg     || newsValues[newsKey].img_url
-//     });
-//   })
-//   db.ref('comments').orderByChild('title').equalTo(title).once('value', (res) => {
-//     console.log(res.val())
-//   })
-// }
+export const deleteComment = (commentId, userId) => {
+  return db.ref("/comments").child(commentId).remove()
+}
 
-export const deleteStory = (id) => {
 
+export const updateComment = (commentId, userId, body) => {
+  queryComments.getCommentById(commentId)
+    .then(snap => {
+      // console.log(snap.val().userId);
+      snap.val().userId === userId 
+        ? db.ref("/comments").child(commentId).update({body:body})
+        : null
+    })
+    .catch(console.log);
 }
 
