@@ -71,7 +71,7 @@ class Home extends React.Component {
               </section>
               <section className="defaultPadding">
                 <h2 className="title homePageGreeting">
-                  <span className="has-text-danger">Hello</span> Alex.
+                  <span className="has-text-danger">Hello</span> {this.props.authUser.displayName ? this.props.authUser.displayName.split(' ')[0] : 'Northcoder'}.
                 </h2>
                 <h3 className="subtitle is-size-4">You are on Week 3.</h3>
               </section>
