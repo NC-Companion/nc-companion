@@ -12,7 +12,6 @@ const Navbar = ({ authUser }) => {
 const AuthenticatedNavbar = ({ authUser }) => {
   return (
     <nav className="navTop">
-
       <SignOutButton />
     </nav>
   );

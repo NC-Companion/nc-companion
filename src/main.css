@@ -50,3 +50,11 @@ body{
 .isDanger{
   background-color: hsl(348, 100%, 61%);
 }
+
+.isHover{
+  cursor: pointer;
+}
+
+.isHover:hover{
+  box-shadow: none !important;
+}
