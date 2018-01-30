@@ -5,7 +5,7 @@ import Resources from "./Resources";
 import PostComments from "./Post-comments";
 import * as commentsQuery from '../firebase/queries/queryEvents';
 import * as resourcesQuery from '../firebase/queries/queryResources';
-import withAuthorization, { authCondition } from "./auth/withAuthorization";
+import withAuthorization, {authCondition} from "./auth/withAuthorization";
 import * as CommentRef from '../firebase/refs/commentsRef';
 
 import "./Lecture.css";
@@ -39,91 +39,108 @@ class Lecture extends React.Component {
     commentsVisible: true,
     comments: null,
     resources: null,
-    eventId : '-L3mv8Z_GhIw2rhN7WTQ'
+    eventId: '-L3mv8Z_GhIw2rhN7WTQ'
   };
 
-  componentDidMount(){
+  componentDidMount() {
     this.fetchComments()
   }
-  
+
   render() {
     return (
-      <section className="lecture">
-      {console.log(this.props.authUser.uid)}
-        <section className='half section'>
-          <section className="lectureHeader title">
-            Node.js<span className="is-pulled-right subtitle has-text-danger">
+      <section className="lecture columns isWhite">
+        <section className='column is-two-thirds isDark'>
+          <section className="lectureHeader title has-text-white">
+            Node.js<span className="is-pulled-right subtitle has-text-white">
               {Moment().format("dddd Do MMMM YYYY")}
             </span>
             <section className="subtitle is-size-6 has-text-danger">Mauro Gestoso</section>
           </section>
 
-          <section className="lectureBody box">
+          <section className="lectureNotes box">
             <code className="js customScroll">{code}</code>
           </section>
 
         </section>
-        <section className='half'>
-          <section className='field is-grouped'>
-            <span
-              className={`control button is-danger is-size-7 ${this.state.commentsVisible && 'is-static'}`}
-              onClick={() => this.toggleView(true)}>Comments</span>
-            <span
-              className={`control button is-danger is-size-7 ${ !this.state.commentsVisible && 'is-static'}`}
-              onClick={() => this.toggleView(false)}>Resources</span>
-          </section>
-          <section className="columns">
-            <section className="lectureFooter column">
-              {!this.state.commentsVisible
-                ? <section className='noTopBottomPadding customScroll height section'>{this
-                      .state
-                      .resources
-                      .map((resource, i) => (<Resources key={i} resource={resource}/>))}</section>
-                : <section className='customScroll height'>
-                  <section className='container'>
-                  <PostComments fetchComments={this.fetchComments} eventId={this.state.eventId} userId = {this.props.authUser.uid} />
-                  </section>
-                  <section className='section'>
-                    {this.state.comments &&
-                      this.state.comments.sort((a, b) => ( new Date(b.comment.createdAt) - new Date(a.comment.createdAt))).map((comment, i) => (<Comments deleteUserComment={this.deleteUserComment} key={i} index={i} comment={comment}/>))}
-                  </section>
-                </section>}
+
+          <section className='hero column is-one-third isWhite lectureRightPane'>
+            <section className='hero-head'>
+              <section className='field is-grouped'>
+                <span
+                  className={`control button is-danger is-size-7 ${this.state.commentsVisible && 'is-static'}`}
+                  onClick={() => this.toggleView(true)}>Comments</span>
+                <span
+                  className={`control button is-danger is-size-7 ${ !this.state.commentsVisible && 'is-static'}`}
+                  onClick={() => this.toggleView(false)}>Resources</span>
+              </section>
+            </section>
+
+            <section className='hero-body lectureRightBody isWhite customScroll'>
+              <section className="">
+                <section className="">
+                  {!this.state.commentsVisible
+                    ? <section className=''>{this
+                          .state
+                          .resources
+                          .map((resource, i) => (<Resources key={i} resource={resource}/>))}</section>
+                    : <section className=''>
+                      <section className='commentInput'>
+                        <PostComments
+                          fetchComments={this.fetchComments}
+                          eventId={this.state.eventId}
+                          userId={this.props.authUser.uid}/>
+                      </section>
+                      <section className=''>
+                        {this.state.comments && this
+                          .state
+                          .comments
+                          .sort((a, b) => (new Date(b.comment.createdAt) - new Date(a.comment.createdAt)))
+                          .map((comment, i) => (<Comments
+                            deleteUserComment={this.deleteUserComment}
+                            key={i}
+                            index={i}
+                            ownComment={this.props.authUser.displayName === comment.user.name}
+                            comment={comment}/>))}
+                      </section>
+                    </section>}
+                </section>
+              </section>
             </section>
           </section>
-        </section>
       </section>
     );
   }
 
   fetchComments = () => {
-    commentsQuery.lectureData(this.state.eventId)
+    commentsQuery
+      .lectureData(this.state.eventId)
       .then(lectureData => {
-        this.setState({
-          comments : lectureData
-        });
+        this.setState({comments: lectureData});
       })
       .catch(console.log);
-      resourcesQuery.getEventResources(this.state.eventId)
-        .then(res => {
-          this.setState({
-            resources : res
-          })
-        })
-        .catch(console.log);
+    resourcesQuery
+      .getEventResources(this.state.eventId)
+      .then(res => {
+        this.setState({resources: res})
+      })
+      .catch(console.log);
   }
 
   deleteUserComment = (commentIndex) => {
     if (this.state.comments[commentIndex].user.id === this.props.authUser.uid) {
-    CommentRef.deleteComment(this.state.comments[commentIndex].comment.id, this.props.authUser.uid)
-      .then(res => {
-        this.setState({
-          comments: this.state.comments.filter((comment, i) => i !== commentIndex)
+      CommentRef
+        .deleteComment(this.state.comments[commentIndex].comment.id, this.props.authUser.uid)
+        .then(res => {
+          this.setState({
+            comments: this
+              .state
+              .comments
+              .filter((comment, i) => i !== commentIndex)
+          })
         })
-      })
-      .catch(console.log)
+        .catch(console.log)
+    }
   }
-}
-
 
   toggleView = bool => {
     if (this.state.commentsVisible !== bool) {

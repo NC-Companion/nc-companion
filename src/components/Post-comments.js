@@ -11,7 +11,7 @@ class PostComments extends React.Component {
       <section className="post-comments">
         <form className='field is-grouped' onSubmit={() => this.state.comment && this.postComment()}>
           <section className='control is-expanded'>
-          <textarea id="comment-body" className='input' rows='1' onChange={this.changeHandler} value={this.state.comment} placeholder='write a comment...' />
+          <textarea id="commentInputField" className='input' maxLength="300" onChange={this.changeHandler} value={this.state.comment} placeholder='write a comment...' />
           </section>
           <button className='control button is-pulled-right is-danger' type='submit'>Post comment</button>
         </form>
