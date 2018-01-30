@@ -2,6 +2,7 @@ import faker from 'faker';
 import * as ref from '../firebase/refs/eventsRef';
 const randomEventGenerator = () => {
   const type = ['rsvp','lecture', 'announcements'];
+  const calendar = ['global','student','cohort'];
   for(let i = 0;i < 50;i++) {
     const data = {
       title :faker.fake("{{hacker.phrase}}"),
@@ -13,9 +14,9 @@ const randomEventGenerator = () => {
       resources : [{title:faker.fake("{{hacker.phrase}}"), url:faker.fake("{{image.image}}")  }],
       mandatory : faker.fake("{{random.boolean}}"),
       // Auto collected from singend in user ---
-      craetionDate : new Date(Date.now()).toISOString(),
+      creationDate : new Date(Date.now()).toISOString(),
       author :faker.fake("{{name.lastName}} ,{{name.firstName}}"),
-      calendarId : faker.fake("{{random.uuid}}"),
+      calendar : calendar[Math.round(Math.random() * 2)],
       authorUid : faker.fake("{{random.uuid}}")
     }
     ref.postNewEvent(data, (err)=>{

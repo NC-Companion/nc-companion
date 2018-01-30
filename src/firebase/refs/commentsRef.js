@@ -2,6 +2,7 @@ import { db } from "../firebase";
 import * as queryComments from '../queries/queryComments';
 
 export const postNewComment = (data, done) => {
+  console.log('postNewComment');
   for (let key in data) {
     if(data[key] === null) {
       return done(`Please provide '${key}'`)
