@@ -6,10 +6,12 @@ import NewsSearch from "./News-search";
 import NewsStories from "./NewsStories";
 import Whiteboard from "./Whiteboard";
 import Weather from "./Weather";
-
+import {whiteBoard} from '../firebase/queries/queryEvents';
 import fetchQuote from "../helpers/fetchQuote";
 import NewsStoryOverlay from "./NewsStoryOverlay";
 import "./Home.css";
+
+import randomEventGenerator from '../seed/seedEvents';
 
 class Home extends React.Component {
   state = {
@@ -17,28 +19,17 @@ class Home extends React.Component {
       body: "",
       author: ""
     },
-    board: [
-      {
-        time: "09:45",
-        body: "Lecture on React."
-      },
-      {
-        time: "13:00",
-        body: "Lunch."
-      },
-      {
-        time: "12:00",
-        body: "Work on sprint."
-      },
-      {
-        time: "14:40",
-        body: "Show & tell & beer."
-      }
-    ],
+    board: [],
     activeEvent: {}
   };
 
   componentDidMount() {
+    whiteBoard()
+      .then(res => {
+        console.log('***', res.length);
+        this.setState({board:res});
+      })
+      .catch(console.log);
     fetchQuote().then(res =>
       this.setState({
         quote: {

@@ -4,6 +4,32 @@ import Moment from 'moment'
 export const getAllEvents = done => {
   return db.ref("/events").once("value");
 };
+export const whiteBoard = () => {
+  let today = new Date(Date.now()).toISOString();
+  const board = [];
+  today = Moment(today).format('DDMMYYYY')
+return db.ref("/events").once("value")
+    .then(events => {
+      events = events.val();
+      return Promise.all(Object.keys(events).map(event =>{
+        let eventDate = Moment(events[event].eventDate).format('DDMMYYYY');
+        if (eventDate === today && events[event].mandatory === 'true') {
+          // console.log('matched');
+          let obj = {
+            time : Moment(events[event].eventDate).format('LT'),
+            body : events[event].title
+          }
+          board.push(obj);
+        }
+
+      }))
+      // console.log('***',board);
+    })
+    .then(()=>{
+      return board;
+    })
+  // return db.ref("/events").orderByChild('eventDate').equalTo(date1).once("value");
+}
 
 export const getEventById = eventId => {
   return db.ref('/events').child(eventId).once('value');

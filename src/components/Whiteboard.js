@@ -9,7 +9,7 @@ class Whiteboard extends React.Component {
           <section className="boardBody height100 defaultPadding is-size-4 customScroll">
             <span className="subtitle is-size-3 ttdtHeader">Things to do today</span>
             <ul className="timeLine defaultPadding">
-              {this.props.content.map(item => <li>{item.time} - {item.body}</li>)}
+              {this.props.content.map(item => <section className="whiteboardBody"><li>{item.time} - <small className="itemTitle">{item.body}</small> </li><br/></section>)}
             </ul>
           </section>
         </section>

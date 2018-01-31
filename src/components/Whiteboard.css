@@ -13,3 +13,12 @@
 .ttdtHeader{
   border-bottom: .1em inset gray;
 }
+
+.whiteboardBody{
+  font-size: 85%;
+}
+
+.itemTitle{
+  color: rgb(54, 54, 54)
+}
+
