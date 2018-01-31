@@ -46,27 +46,29 @@ export const listenForLectureData = (eventId, done) => {
     .on('value', (snapshot) => {
       const commentsById = snapshot.val();
       const comments = [], userPromises = [];
-      Object.keys(commentsById).forEach(commentId => {
-        const comment = commentsById[commentId];
-        comments.push(Object.assign({}, comment, { id: commentId }))
-        userPromises.push(db.ref('users').child(comment.userId).once('value'))
-      })
-      Promise.all(userPromises)
-        .then(userSnapshots => {
-          return userSnapshots.map(snapshot => {
-            return snapshot.val();
-          })
+      if(commentsById) {
+        Object.keys(commentsById).forEach(commentId => {
+          const comment = commentsById[commentId];
+          comments.push(Object.assign({}, comment, { id: commentId }))
+          userPromises.push(db.ref('users').child(comment.userId).once('value'))
         })
-        .then(users => {
-          const commentsData = comments.map((comment, i) => {
-            const user = Object.assign({}, users[i], { id: comment.userId })
-            return {
-              comment,
-              user
-            }
+        Promise.all(userPromises)
+          .then(userSnapshots => {
+            return userSnapshots.map(snapshot => {
+              return snapshot.val();
+            })
           })
-          done(null, commentsData)
-        })
+          .then(users => {
+            const commentsData = comments.map((comment, i) => {
+              const user = Object.assign({}, users[i], { id: comment.userId })
+              return {
+                comment,
+                user
+              }
+            })
+            done(null, commentsData)
+          })
+      } else done('There are no comments found on this event');
     })
 }
 

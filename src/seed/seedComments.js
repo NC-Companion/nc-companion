@@ -8,11 +8,16 @@ const randomCommentGenerator = () => {
   console.log('in randomCommentGenerator')
   const type = ['rsvp','mandatory', 'announcements'];
   for(let i = 0;i < 50;i++) {
+    const obj = {};
+    const id = users[Math.round(Math.random()*7)];
+    obj[id]= { name : faker.fake("{{name.lastName}} ,{{name.firstName}}"),
+    avatarUrl : faker.fake("{{random.image}}")}
     const data = {
       eventId : events[Math.round(Math.random()*8)],
-      userId : users[Math.round(Math.random()*7)],    
+      userId : id,    
       body : faker.fake("{{lorem.paragraphs}}"),
-      votes : faker.fake("{{random.number}}"),      
+      votes : faker.fake("{{random.number}}"), 
+      likedBy : obj,     
       creationDate : new Date(Date.now()).toISOString()
     }
     ref.postNewComment(data, (err)=>{
