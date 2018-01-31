@@ -6,7 +6,7 @@ import CalendarOverlay from './CalendarOverlay';
 import Moment from "moment";
 import {Link} from 'react-router-dom'
 
-import testState from './testCalState'
+import {calendarEvents} from '../firebase/queries/queryEvents';
 
 import "./Calendar.css";
 import "rc-calendar/assets/index.css";
@@ -15,10 +15,30 @@ import "rc-select/assets/index.css";
 
 class Calendar extends React.Component {
 
-  state = testState;
+  state = {
+    CalOverlay: {
+      date: '',
+      cohort: [],
+      global: [],
+      user: []
+    },
+    displayEvent: {},
+    cohortCalendar: {
+    },
+    globalCalendar: {
+    },
+    userCalendar: {
+    }
+  };;
 
   componentWillReceiveProps(newProps){
     console.log(newProps);
+  }
+
+  componentDidMount() {
+    calendarEvents().then(res => {this.setState({
+      cohortCalendar: res.cohort
+    }); console.log(res)})
   }
 
   render() {
@@ -95,6 +115,7 @@ class Calendar extends React.Component {
     const dateGlobalCal = this.state.globalCalendar[Moment(date).format('DDMMYYYY')];
     const dateCohortCal = this.state.cohortCalendar[Moment(date).format('DDMMYYYY')];
     const dateUserCal = this.state.userCalendar[Moment(date).format('DDMMYYYY')];
+
     this.setState({
       CalOverlay: {
         date,
@@ -135,11 +156,20 @@ class Calendar extends React.Component {
   };
 
   retriveCellVal = date => {
-    const DateOnAllCalendars = this
-      .state
-      .globalCalendar[date]
-      .concat(this.state.cohortCalendar[date])
-      .concat(this.state.userCalendar[date]);
+    let DateOnAllCalendars = [];
+
+    const DateOnGlobalCal = this.state.globalCalendar[date];
+    const DateOnCohortCal = this.state.cohortCalendar[date];
+    const DateOnUserCal = this.state.userCalendar[date];
+
+    if (DateOnGlobalCal) DateOnAllCalendars = DateOnAllCalendars.concat(DateOnGlobalCal);
+    if (DateOnCohortCal) DateOnAllCalendars = DateOnAllCalendars.concat(DateOnCohortCal);
+    if (DateOnUserCal) DateOnAllCalendars = DateOnAllCalendars.concat(DateOnUserCal);
+    
+    // this.state.globalCalendar[date]
+    //   .concat(this.state.cohortCalendar[date])
+    //   .concat(this.state.userCalendar[date]);
+
     const Lectures = DateOnAllCalendars
       .filter(eve => eve.isLecture === true)
       .length;

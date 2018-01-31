@@ -16,6 +16,7 @@ class CalendarOverlay extends React.Component {
 
   render() {
     const {events, onDeselect, info} = this.props;
+    console.log(info)
     return (
       <section className="overlayBody">
         <section class="hero overlay-hero is-medium">
@@ -56,8 +57,8 @@ class CalendarOverlay extends React.Component {
                       .concat(info.global)
                       .concat(info.user)
                       .map(event => {
-                        return (this.state[event.calendarID] && this.state[event.type]) && 
-                        <a className={`box notification isHover is-${this.parentCalendar(event.calendarID)}`} onClick={() => this.props.displayEvent(event)}>
+                        return (this.state[event.calendar] || this.state[event.type]) && 
+                        <a className={`box notification isHover is-${this.parentCalendar(event.calendar)}`} onClick={() => this.props.displayEvent(event)}>
                           <section>
                             <section className='is-size-4 has-text-weight-bold columns'>
                               <span className='column is-four-fifths'>{event.title}</span>

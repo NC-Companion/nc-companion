@@ -58,7 +58,7 @@ export const calendarEvents = (userId) => {
       return Promise.all(Object.keys(snap.val()).map(event => {
         const date = Moment(events[event].eventDate).format('DDMMYYYY');
         let type, isLecture;
-        events[event].mandatory === true 
+        events[event].mandatory === 'true' 
         ? type = 'mandatory'
         : type = 'optional'
         events[event].type === 'lecture' 
