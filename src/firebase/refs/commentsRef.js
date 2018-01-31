@@ -10,11 +10,12 @@ export const postNewComment = (data, done) => {
   db.ref('/comments').push(data);
   return done('Success');
 }
+
 export const voteComment = (commentId) => {
   return queryComments.getCommentById(commentId)
     .then(snap => {
       let currentVotes = snap.val().votes;
-      db.ref("/comments").child(commentId).update({votes:currentVotes + 1});
+     return db.ref("/comments").child(commentId).update({votes:currentVotes + 1});
     })
     .catch(console.log);
 }
