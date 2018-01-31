@@ -7,6 +7,8 @@ import * as commentsQuery from '../firebase/queries/queryEvents';
 import * as resourcesQuery from '../firebase/queries/queryResources';
 import withAuthorization, {authCondition} from "./auth/withAuthorization";
 import * as CommentRef from '../firebase/refs/commentsRef';
+import PT from "prop-types";
+
 
 import "./Lecture.css";
 
@@ -100,7 +102,8 @@ class Lecture extends React.Component {
                             key={i}
                             index={i}
                             ownComment={this.props.authUser.displayName === comment.user.name}
-                            comment={comment}/>))}
+                            comment={comment}
+                            authUser={this.props.authUser}/>))}
                       </section>
                     </section>}
                 </section>
@@ -148,5 +151,9 @@ class Lecture extends React.Component {
     }
   }
 }
+
+Lecture.propTypes = {
+  authUser: PT.object
+};
 
 export default withAuthorization(authCondition)(Lecture);

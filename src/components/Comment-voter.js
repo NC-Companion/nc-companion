@@ -1,47 +1,63 @@
 import React from 'react';
 import * as CommentRef from '../firebase/refs/commentsRef';
+import PT from "prop-types";
+
 
 
 class CommentVoter extends React.Component {
   state = {
-    votes: this.props.comment.comment.votes,
-    disabled: false,
-    buttonIsBlue: false,
+    comment: {},
+    voteInc: false
   };
 
+  componentDidMount() {
+    this.setState({
+      comment: this.props.comment,
+      voteInc: false
+    })
+  }
+
+  componentWillReceiveProps(newProps) {
+    console.log(newProps);
+    if (newProps.comment) {
+      this.setState({
+        comment: newProps.comment,
+        voteInc: false
+      })
+    }
+  }
+
   render() {
+    let displayVotes;
+    if (this.state.comment.comment) displayVotes = this.state.voteInc ? this.state.comment.comment.votes + 1 : this.state.comment.comment.votes;
     return (
       <section>
-        <p className={`button ${this.state.buttonIsBlue ? 'is-info' : 'is-danger'}`} disabled={this.state.disabled} id="voteUpButton" onClick={() => this.incrementVote(this.props.comment.comment.id)}>
+        <p className={`button ${this.state.voteInc ? 'is-info' : 'is-danger'}`} id="voteUpButton" onClick={() => this.incrementVote(this.state.comment.comment.id)}>
           <span><i className="fas fa-thumbs-up"></i></span>
-          <span className='section' id="voteCount">{this.state.votes}</span>
+          <span className='section' id="voteCount">{displayVotes}</span>
         </p>
       </section>
     )
   }
 
   incrementVote = (id) => {
-    if (!this.state.disabled) {
-    CommentRef.voteComment(id)
-        this.setState({
-          votes: this.state.votes + 1,
-          buttonIsBlue: true,
-          disabled: true
-        })
-      }
-       };
-
- 
-
-  onUpVote = () => {
-    return (
-    // this.incrementVote(this.props.comment.comment.id),
-    this.disableButton(),
-    this.turnButtonBlue()
-
-    )
-  }
-
+    if (!this.state.voteInc) {
+      CommentRef.voteComment(id, 1)
+      this.setState({
+        voteInc: true
+      })
+    }
+    else {
+      CommentRef.voteComment(id, -1)
+      this.setState({
+        voteInc: false
+      });
+    }
+  };
 }
+
+CommentVoter.propTypes = {
+  comment: PT.object,
+};
 
 export default CommentVoter;

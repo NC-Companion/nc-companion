@@ -1,4 +1,6 @@
 import React from 'react';
+import PT from "prop-types";
+
 
 class Resources extends React.Component{
     render () {
@@ -19,5 +21,9 @@ class Resources extends React.Component{
         )
     }
 }
+
+Resources.propTypes = {
+    resource: PT.object
+  };
 
 export default Resources;

@@ -1,6 +1,10 @@
 import React from 'react';
 import Moment from 'moment';
 import CommentVoter from './Comment-voter';
+import Deletecomment from './Delete-comment';
+import DeleteComment from './Delete-comment';
+import PT from "prop-types";
+
 
 
 class Comments extends React.Component {
@@ -24,13 +28,20 @@ class Comments extends React.Component {
                     <CommentVoter comment={this.props.comment} />
                     </section>
                 </section>
-                <section class="media-right">
-                    <button class="delete" onClick={()=> this.props.deleteUserComment(this.props.index)}></button>
-                </section>
+                {this.props.comment.user.id === this.props.authUser.uid ? <DeleteComment deleteUserComment={this.props.deleteUserComment} index={this.props.index} /> : null}
             </article>
         )
     }
 }
+
+Comments.propTypes = {
+    deleteUserComment: PT.func,
+    key: PT.number,
+    index: PT.number,
+    ownComment: PT.bool,
+    comment: PT.object,
+    authUser: PT.object
+  };
 
 
 export default Comments;

@@ -1,5 +1,7 @@
 import React from 'react';
 import * as CommentRef from '../firebase/refs/commentsRef';
+import PT from "prop-types";
+
 
 class PostComments extends React.Component {
   state = {
@@ -9,9 +11,9 @@ class PostComments extends React.Component {
   render() {
     return (
       <section className="post-comments">
-        <form className='field is-grouped' onSubmit={() => this.state.comment && this.postComment()}>
+        <form className='field is-grouped' onSubmit={(e) => this.state.comment && this.postComment(e)}>
           <section className='control is-expanded'>
-          <textarea id="commentInputField" className='input' maxLength="300" onChange={this.changeHandler} value={this.state.comment} placeholder='write a comment...' />
+          <textarea id="commentInputField" className='input' maxLength="300" onKeyPress={this.handleKeyPress} onChange={this.changeHandler} value={this.state.comment} placeholder='write a comment...' />
           </section>
           <button className='control button is-pulled-right is-danger' type='submit'>Post comment</button>
         </form>
@@ -20,22 +22,23 @@ class PostComments extends React.Component {
   }
 
   changeHandler = (event) => {
+    if (event) event.preventDefault();
     let { comment } = this.state;
-    if (comment.length <= 250) {
+    if (comment.length <= 300) {
       this.setState({
         comment: event.target.value,
       });
     }
   }
 
-  // handleKeyPress = (target) => {
-  //   if (target.charCode === 13) {
-  //     this.state.comment && this.postComment()
-  //   }
-  // }
+  handleKeyPress = (target) => {
+    if (target.charCode === 13 && !target.shiftKey) {
+      target.preventDefault()
+      this.state.comment && this.postComment()
+    }
+  }
 
   postComment = (e) => {
-    this.setState({comment: ''})
     if (e) e.preventDefault();
     const comment = {
       body: this.state.comment,
@@ -45,7 +48,14 @@ class PostComments extends React.Component {
       votes: 0
     }
     CommentRef.postNewComment(comment, res => { res==='Success' ? this.props.fetchComments() : null });
+    this.setState({comment: ''})
   }
 }
+
+PostComments.propTypes = {
+  fetchComments: PT.func,
+  eventId: PT.string,
+  userID: PT.string
+};
 
 export default PostComments;
