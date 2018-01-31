@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import PT from "prop-types";
 
 import * as routes from "../constants/routes";
@@ -43,12 +43,8 @@ class App extends React.Component {
                 render={() => <Lecture authUser={authUser} />} 
               />
               <Route exact path={routes.news} render={() => <NewsStories />} />
-              <Route
-                exact
-                path={routes.root}
-                render={routerProps => (
-                  <SignInForm history={routerProps.history} />
-                )}
+              <Route exact path={routes.root} render={routerProps => (!authUser ? <SignInForm history={routerProps.history} />
+               : <Redirect to={routes.home}/> )}
               />
             </Switch>
           </section>
