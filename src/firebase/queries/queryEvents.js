@@ -47,6 +47,11 @@ export const lectureData = (eventId) => {
 
 export const calendarEvents = (userId) => {  
   const data = {};
+  const student = {};
+  const global = {};
+  const cohort = {};
+
+
   return db.ref("/events").once("value")
     .then(snap => {
       const events = snap.val();
@@ -59,10 +64,11 @@ export const calendarEvents = (userId) => {
         events[event].type === 'lecture' 
         ? isLecture = true
         : isLecture = false
-
-        return db.ref("/users").child(events[event].authorUid).once("value")
-          .then(snap => {
-            let name = snap.val().name;
+        return db.ref(`/users/${events[event].authorUid}`).once("value")
+          .then(user => {
+            let name;
+            if (user.val()) name  = user.val().name;
+              
             const obj = {
               uid: event,
               type: type,
@@ -71,20 +77,36 @@ export const calendarEvents = (userId) => {
               tag: events[event].tag,
               imgUrl: events[event].imageUrl,
               dueDate: events[event].eventDate,
-              calendarID: events[event].calendarId,
+              calendar: events[event].calendar,
               resourcesID: events[event].resources,
-              author: name,
+              author: name || 'Anonymous',
               isLecture: isLecture,
               commentID: ''
             }
-            if (data[date]) {
-              data[date].push(obj)
-            } else {
-              data[date] = [obj];
-            };            
+            if (obj.calendar === 'student') {
+              if (student[date]) {
+                student[date].push(obj)
+              } else {
+                student[date] = [obj];
+              }  
+            }
+            if (obj.calendar === 'cohort') {
+              if (cohort[date]) {
+                cohort[date].push(obj)
+              } else {
+                cohort[date] = [obj];
+              }  
+            }
+            if (obj.calendar === 'global') {
+              if (global[date]) {
+                global[date].push(obj)
+              } else {
+                global[date] = [obj];
+              }  
+            }            
           })  // users snap          
       }))     // Object.keys MAP
     })    //  Evnets snap
-    .then(()=>{return data})
+    .then(()=>{return {student,cohort,global}})
     .catch(console.log);
 }
