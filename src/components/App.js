@@ -15,6 +15,7 @@ import NewsStories from "./NewsStories";
 import CreateNews from "./CreateNews";
 import Lecture from "./Lecture";
 import SignInForm from "./SignInForm";
+import NotFound from './Not-found';
 
 class App extends React.Component {
   render() {
@@ -46,6 +47,7 @@ class App extends React.Component {
               <Route exact path={routes.root} render={routerProps => (!authUser ? <SignInForm history={routerProps.history} />
                : <Redirect to={routes.home}/> )}
               />
+              <Route path={routes.notFound} component={NotFound} />
             </Switch>
           </section>
         </section>
