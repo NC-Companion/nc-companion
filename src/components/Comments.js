@@ -1,5 +1,6 @@
 import React from 'react';
 import Moment from 'moment';
+import CommentVoter from './Comment-voter';
 
 
 class Comments extends React.Component {
@@ -12,23 +13,20 @@ class Comments extends React.Component {
                         <img src={this.props.comment.user.imageUrl}/>
                     </p>
                 </figure>
-                <div className="media-content" style={{overflow: 'hidden'}}>
-                    <div className="content">
+                <section class="media-content" style={{overflow: 'hidden'}}>
+                    <section class="content">
                         <p>
                             <strong>{this.props.comment.user.name}</strong>
                             <small>{this.props.comment.user.handle}</small>
                             <small>   {Moment(this.props.comment.comment.createdAt).fromNow()}</small>
                             <section className='is-size-6'>{this.props.comment.comment.body}</section>
                         </p>
-                    <p className="button is-danger">
-                            <span><i className="fas fa-thumbs-up"></i></span>
-                            <span className='section'>{this.props.comment.comment.votes}</span>
-                    </p>
-                    </div>
-                </div>
-                <div className="media-right">
-                    {this.props.ownComment && <button className="delete" onClick={()=> this.props.deleteUserComment(this.props.index)}></button>}
-                </div>
+                    <CommentVoter comment={this.props.comment} />
+                    </section>
+                </section>
+                <section class="media-right">
+                    <button class="delete" onClick={()=> this.props.deleteUserComment(this.props.index)}></button>
+                </section>
             </article>
         )
     }
