@@ -1,18 +1,41 @@
 .cellContent{
     height: 100%;
-    width: 11vw;
+    width: 100%;
     overflow: hidden;
-    text-overflow: ellipsis;
+}
+
+.rc-calendar-date{
+    height: 12vh !important;
+    width: 8vw !important;
+    padding: 0 !important;
 }
 
 .eventsCount{
     height: 90%;
     overflow: hidden;
-    /* color: black */
+    font-size: .9vw;
+}
+
+.rc-calendar-fullscreen{
+    margin: auto !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border: 0 !important;
+    width: 100% !important;
+    font-size: .9em !important;
+}
+
+.calendarNav{
+    width: 98%;
+    height: 10%;
+    margin: auto;
+}
+
+.calNavSection{
+    height: 90%;
 }
 
 .lectureTopic{
-    /* text-align: center; */
     height: 51%;
     overflow: hidden;
 }
@@ -20,4 +43,19 @@
 .lectureTutor{
     font-weight: bold;
     margin-top: 5%;
+}
+
+.calendarCounter{
+    height: 1.3vw;
+}
+
+.calendar{
+    margin: auto;
+    height: 100%;
+}
+
+.calendarContainer{
+    height: 90%;
+    width: 100%;
+    margin: auto;
 }

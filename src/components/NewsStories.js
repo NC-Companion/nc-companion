@@ -48,11 +48,11 @@ class NewsStories extends React.Component {
     }
 
     return (
-      <section className="newsFeedBody">
-        <section className="searchFilter">
+      <section className="newsFeedBody height100 hero">
+        <section className="searchFilter hero-head">
           <NewsSearch handleChange={this.handleChange}/>
         </section>
-        <section className='eventsHolder section customScroll'>
+        <section className='eventsHolder hero-body customScroll'>
           {matchedEvents && matchedEvents.map((event, i) => (<NewsStory key={event.id} index={i} selectEvent={this.selectEvent} {...event}/>))}
         </section>
       </section>

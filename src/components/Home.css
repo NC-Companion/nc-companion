@@ -7,7 +7,7 @@
 }
 
 .homeContent{
-	overflow: hidden;
+	height: 100%
 }
 
 .homeLeft{
@@ -24,4 +24,9 @@
 
 .homeDashContent{
 	height: 60%;
+}
+
+.home{
+	margin: auto;
+	height: 100%;
 }

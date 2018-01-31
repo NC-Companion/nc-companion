@@ -1,53 +1,52 @@
 .lecture{
-    /* padding-top: 2vw; */
-    padding: 0 1vw;
     margin: auto;
-    /* background-color: lightblue; */
-    height: 100vh;
+    height: 100%;
 }
 
-.lectureHeader{
-    height: 6vh;
-}
 code {
     display: block;
     white-space: pre-wrap;
     background-color: white;
-    height: 30vh;overflow-y: scroll;
-}
-
-.lectureFooter{
-    height: 45.3vh;
-    overflow-y: hidden;
+    height: 20%;
+    overflow-y: scroll;
 }
 
 body::-webkit-scrollbar {
     width: 0em;
 }
 
-.height{
-    height: 43.5vh;
-}
-
-.customScroll{
-    overflow-y: scroll;
-}
-
-.customScroll::-webkit-scrollbar {
-    width: .6vw;
-}
- 
-.customScroll::-webkit-scrollbar-thumb {
-    border-radius: 10em;
-    background-color: hsl(348, 100%, 61%);
-}
-
-.half{
-    /* background-color: lightgreen; */
-    height: 50vh;
-}
-
-.noTopBottomPadding{
+/* .noTopBottomPadding{
     padding-top: 0;
     padding-bottom: 0;
+} */
+
+.lectureNotes{
+    border-radius: 0;
+}
+
+.lectureRightPane{
+    /* height: 90vh; */
+    height: 100%;
+    /* overflow: hidden; */
+}
+
+.lectureRightBody{
+    height: 80%;
+    padding: 0vw .6vw;
+    margin-top: 1vw;
+}
+
+.commentInput{
+    margin-bottom: 1vw;
+}
+
+#commentInputField{
+    height: 2.25em;
+    transition: height 2s ease;
+    resize: none;
+    border-radius: 0;
+}
+#commentInputField:focus{
+    height: 10em;
+    transition: height 2s ease;
 }

@@ -43,11 +43,11 @@ class CalendarOverlay extends React.Component {
                     </section>
                   </section>
                 </section>
-                <section className='hero-body'>
+                <section className='hero-body' style={{height: '40%'}}>
                   <section
                     className='section is-size-6 customScroll'
                     style={{
-                    height: '60vh',
+                    height: '90%',
                     paddingTop: '0',
                     paddingBottom: '0'
                   }}>
@@ -57,7 +57,7 @@ class CalendarOverlay extends React.Component {
                       .concat(info.user)
                       .map(event => {
                         return (this.state[event.calendarID] && this.state[event.type]) && 
-                        <a className={`box notification isHover is-${this.parentCalendar(event.calendarID)}`} href={`${event.isLecture ? '/lecture' : '/event'}/${event.uid}`}>
+                        <a className={`box notification isHover is-${this.parentCalendar(event.calendarID)}`} onClick={() => this.props.displayEvent(event)}>
                           <section>
                             <section className='is-size-4 has-text-weight-bold columns'>
                               <span className='column is-four-fifths'>{event.title}</span>

@@ -7,11 +7,9 @@ class Comments extends React.Component {
     
     render() {
         return (
-            
-            <article class="media">
-            {/* {console.log(this.props.comment)} */}
-                <figure class="media-left">
-                    <p class="image is-64x64">
+            <article className="media">
+                <figure className="media-left">
+                    <p className="image is-64x64">
                         <img src={this.props.comment.user.imageUrl}/>
                     </p>
                 </figure>
@@ -19,8 +17,7 @@ class Comments extends React.Component {
                     <section class="content">
                         <p>
                             <strong>{this.props.comment.user.name}</strong>
-                            <small>@{this.props.comment.user.handle}</small>
-                            {/* {console.log(this.props.comment.createdAt)} */}
+                            <small>{this.props.comment.user.handle}</small>
                             <small>   {Moment(this.props.comment.comment.createdAt).fromNow()}</small>
                             <section className='is-size-6'>{this.props.comment.comment.body}</section>
                         </p>

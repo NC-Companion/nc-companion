@@ -25,7 +25,7 @@ class App extends React.Component {
           <section className="level-right">
            <span> <Navbar authUser={authUser} /></span>
           </section>
-          <section className="bodyContent">
+          <section className="bodyContent isDanger">
             <Switch>
               <Route
                 path={routes.account}
@@ -37,7 +37,7 @@ class App extends React.Component {
                 render={() => <Home authUser={authUser} />}
               />
               <Route exact path={routes.calendar} 
-                render={() => <Calendar authUser={authUser} />} 
+                render={() => <Calendar authUser={authUser} />}
               />
               <Route exact path={routes.lecture} 
                 render={() => <Lecture authUser={authUser} />} 
