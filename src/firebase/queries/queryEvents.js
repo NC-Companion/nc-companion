@@ -5,9 +5,14 @@ export const getAllEvents = done => {
   return db.ref("/events").once("value");
 };
 
+export const getEventById = eventId => {
+  return db.ref('/events').child(eventId).once('value');
+}
+
 export const lectureQuery = (id) => {
   return db.ref('events').orderByChild(id).once('value');  
 }
+
 export const lectureData = (eventId) => {
   if(eventId) {
     const comments = [];

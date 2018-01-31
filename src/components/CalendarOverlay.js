@@ -58,7 +58,7 @@ class CalendarOverlay extends React.Component {
                       .concat(info.user)
                       .map(event => {
                         return (this.state[event.calendar] || this.state[event.type]) && 
-                        <a className={`box notification isHover is-${this.parentCalendar(event.calendar)}`} onClick={() => this.props.displayEvent(event)}>
+                        <Link to={event.isLecture && `/lecture/${event.uid}`} stuff='aaron' ><section className={`box notification isHover is-${this.parentCalendar(event.calendar)}`} onClick={() => this.props.displayEvent(event)}>
                           <section>
                             <section className='is-size-4 has-text-weight-bold columns'>
                               <span className='column is-four-fifths'>{event.title}</span>
@@ -73,7 +73,7 @@ class CalendarOverlay extends React.Component {
                               <span className='is-pulled-right'>{event.author}</span>
                             </section>
                           </section>
-                        </a>
+                        </section></Link>
                       })}
                   </section>
                 </section>

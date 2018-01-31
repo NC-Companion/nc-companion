@@ -11,6 +11,7 @@ import PT from "prop-types";
 
 
 import "./Lecture.css";
+import { lecture } from "../constants/routes";
 
 const code = `// the array to be sorted
 var list = ['Delta', 'alpha', 'CHARLIE', 'bravo'];
@@ -41,7 +42,8 @@ class Lecture extends React.Component {
     commentsVisible: true,
     comments: null,
     resources: null,
-    eventId: '-L3mv8Z_GhIw2rhN7WTQ'
+    eventId: window.location.href.split('/').pop(),
+    lecture: null
   };
 
   componentDidMount() {
@@ -53,14 +55,14 @@ class Lecture extends React.Component {
       <section className="lecture columns isWhite">
         <section className='column is-two-thirds isDark'>
           <section className="lectureHeader title has-text-white">
-            Node.js<span className="is-pulled-right subtitle has-text-white">
-              {Moment().format("dddd Do MMMM YYYY")}
+            {this.state.lecture && this.state.lecture.title}<span className="is-pulled-right subtitle has-text-white">
+              {Moment(this.state.lecture && this.state.lecture.eventDate).format("dddd Do MMMM YYYY")}
             </span>
-            <section className="subtitle is-size-6 has-text-danger">Mauro Gestoso</section>
+            <section className="subtitle is-size-6 has-text-danger">{this.state.lecture && this.state.lecture.author}</section>
           </section>
 
           <section className="lectureNotes box">
-            <code className="js customScroll">{code}</code>
+            <code className="js customScroll">{this.state.lecture && this.state.lecture.body}</code>
           </section>
 
         </section>
@@ -121,6 +123,9 @@ class Lecture extends React.Component {
         this.setState({comments: lectureData});
       })
       .catch(console.log);
+    commentsQuery
+      .getEventById(this.state.eventId)
+      .then(lecture => this.setState({lecture: lecture.val()}))
     resourcesQuery
       .getEventResources(this.state.eventId)
       .then(res => {
