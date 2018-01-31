@@ -18,13 +18,18 @@ class NewsStories extends React.Component {
   componentDidMount() {
     getAllEvents() 
     .then(res=>{
-      const events = Object
+      return Object
         .entries(res.val())
         .map(([id, event]) => {
           event.id = id;
           return event;
-        });      
-      this.setState({loading: false, events});
+        });  
+    })
+    .then(events =>{
+      const filteredEvents = events.filter(event => {
+        return event.type === 'announcements';
+      })
+      this.setState({loading: false, events:filteredEvents});
     })
     .catch(console.log);
   }

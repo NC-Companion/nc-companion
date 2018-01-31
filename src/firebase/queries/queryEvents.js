@@ -39,41 +39,35 @@ export const lectureQuery = (id) => {
   return db.ref('events').orderByChild(id).once('value');  
 }
 
-export const lectureData = (eventId) => {
-  if(eventId) {
-    const comments = [];
-    return db.ref('comments').orderByChild('eventId').equalTo(eventId)
-      .once('value')
-      .then(snap => {
-        const res = snap.val();
-        return Promise.all(Object.keys(res).map(key => {
-          return db.ref('users').child(res[key].userId).once('value')
-            .then(snap=>{
-              const user = {
-                name : snap.val().name,
-                handle : snap.val().handle,
-                imageUrl : snap.val().avatarUrl,
-                id : res[key].userId
-              }
-              const comment = {
-                id : key,
-                body : res[key].body,
-                createdAt : res[key].creationDate,
-                votes : res[key].votes
-              }
-              comments.push({user,comment});
-            })
-            .catch(console.log);
-        }))
+export const listenForLectureData = (eventId, done) => {
+  if (!eventId) return done(new Error('You must pass an event id!'))
+  
+  db.ref('comments').orderByChild('eventId').equalTo(eventId)
+    .on('value', (snapshot) => {
+      const commentsById = snapshot.val();
+      const comments = [], userPromises = [];
+      Object.keys(commentsById).forEach(commentId => {
+        const comment = commentsById[commentId];
+        comments.push(Object.assign({}, comment, { id: commentId }))
+        userPromises.push(db.ref('users').child(comment.userId).once('value'))
       })
-      .then(() => {
-        return comments;
-      })
-      .catch(console.log);
-  }
-  else {
-    return 'No Event ID id provided'
-  }
+      Promise.all(userPromises)
+        .then(userSnapshots => {
+          return userSnapshots.map(snapshot => {
+            return snapshot.val();
+          })
+        })
+        .then(users => {
+          const commentsData = comments.map((comment, i) => {
+            const user = Object.assign({}, users[i], { id: comment.userId })
+            return {
+              comment,
+              user
+            }
+          })
+          done(null, commentsData)
+        })
+    })
 }
 
 export const calendarEvents = (userId) => {  

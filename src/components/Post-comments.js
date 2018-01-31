@@ -47,8 +47,8 @@ class PostComments extends React.Component {
       creationDate: new Date(Date.now()).toISOString(),
       votes: 0
     }
-    CommentRef.postNewComment(comment, res => { res==='Success' ? this.props.fetchComments() : null });
-    this.setState({comment: ''})
+    CommentRef.postNewComment(comment, res => { res==='Success' ? this.setState({comment: ''}) : null });
+    
   }
 }
 

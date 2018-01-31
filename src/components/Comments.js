@@ -14,7 +14,7 @@ class Comments extends React.Component {
             <article className="media">
                 <figure className="media-left">
                     <p className="image is-64x64">
-                        <img src={this.props.comment.user.imageUrl}/>
+                        <img src={this.props.comment.user.avatarUrl}/>
                     </p>
                 </figure>
                 <section class="media-content" style={{overflow: 'hidden'}}>
@@ -22,7 +22,7 @@ class Comments extends React.Component {
                         <p>
                             <strong>{this.props.comment.user.name}</strong>
                             <small>{this.props.comment.user.handle}</small>
-                            <small>   {Moment(this.props.comment.comment.createdAt).fromNow()}</small>
+                            <small>   {Moment(this.props.comment.comment.creationDate).fromNow()}</small>
                             <section className='is-size-6'>{this.props.comment.comment.body}</section>
                         </p>
                     <CommentVoter comment={this.props.comment} />

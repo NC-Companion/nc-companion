@@ -98,7 +98,7 @@ class Lecture extends React.Component {
                         {this.state.comments && this
                           .state
                           .comments
-                          .sort((a, b) => (new Date(b.comment.createdAt) - new Date(a.comment.createdAt)))
+                          .sort((a, b) => (new Date(b.comment.creationDate) - new Date(a.comment.creationDate)))
                           .map((comment, i) => (<Comments
                             deleteUserComment={this.deleteUserComment}
                             key={i}
@@ -118,11 +118,11 @@ class Lecture extends React.Component {
 
   fetchComments = () => {
     commentsQuery
-      .lectureData(this.state.eventId)
-      .then(lectureData => {
-        this.setState({comments: lectureData});
+      .listenForLectureData(this.state.eventId, (err, comments) => {
+        if (err) return console.log(err);
+        this.setState({comments})
       })
-      .catch(console.log);
+      
     commentsQuery
       .getEventById(this.state.eventId)
       .then(lecture => this.setState({lecture: lecture.val()}))
