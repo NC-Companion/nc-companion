@@ -51,20 +51,17 @@ class Home extends React.Component {
 
   render() {
     return (
-      <section className="homeMain height100">
+      <section className="home columns isWhite">
         {this.state.activeEvent.title && (
           <NewsStoryOverlay
             event={this.state.activeEvent}
             close={this.hideEvent}
           />
         )}
-        <section className="homeContent columns height100">
           <section className="homeLeft column is-one-third isDark section">
-            <section>
               <NewsStories viewEvent={this.viewEvent} />
-            </section>
           </section>
-          <section className="column is-two-third isWhite section">
+          <section className="column is-two-thirds isWhite section">
             <section className="">
               <section>
                 <Weather />
@@ -110,7 +107,6 @@ class Home extends React.Component {
               </section>
             </section>
           </section>
-        </section>
       </section>
     );
   }

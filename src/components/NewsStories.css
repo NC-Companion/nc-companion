@@ -7,12 +7,7 @@
 }
 
 .eventsHolder{
-    padding: 0;
+    height: 10%;
+    padding: 0vw .6vw;
     margin-top: 1vw;
-    padding-right: .7vw;
-    /* 720p */
-    /* height: 76.59vh; */
-    /* 1080p */
-    height: 81.59vh;
-    overflow: hidden;
 }

@@ -3,7 +3,7 @@ import PT from "prop-types";
 
 const NewsSearch = ({handleChange}) => (
   <section className="">
-    <section className='is-size-2 has-text-weight-bold has-text-danger'>{'< '}NC <span className='has-text-white'>Buddy /></span></section>
+    <section className='title has-text-danger'>{'< '}NC <span className='has-text-white'>Buddy /></span></section>
     <section class="field has-addons">
       <p class="control is-expanded">
         <input

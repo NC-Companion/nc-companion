@@ -5,12 +5,14 @@ class NewsStory extends React.Component {
   render() {
     const { selectEvent, title, index, imageUrl } = this.props;
     // imageUrl is an array
+    const inlineStyle = {background: `linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)), url(${imageUrl[0]})`, backgroundSize: "cover"}
+    const altInlineStyle = {background: `rgb(255,255,255)`}
     return (
       <section className="newsStory box" onClick={() => {selectEvent(index)}}
-        style={{background: `linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)), url(${imageUrl[0]})`, backgroundSize: "cover"}}>
+        style={altInlineStyle}>
         <section className="" style={{ height: "80%" }} />
         <section className="newsStoryTitle">
-          <span className="storyHeader has-text-white is-size-5 has-text-weight-bold">{title}</span>
+          <span className="storyHeader has-text-dark subtitle">{title}</span>
         </section>
       </section>
     );
