@@ -1,41 +1,18 @@
 import React from "react";
 import Moment from "moment";
+import LecNotes from './Lecture-notes';
+import LectureToggle from './Lecture-toggle';
 import Comments from "./Comments";
 import Resources from "./Resources";
 import PostComments from "./Post-comments";
-import * as commentsQuery from '../firebase/queries/queryEvents';
-import * as resourcesQuery from '../firebase/queries/queryResources';
-import withAuthorization, {authCondition} from "./auth/withAuthorization";
-import * as CommentRef from '../firebase/refs/commentsRef';
+import * as commentsQuery from '../../firebase/queries/queryEvents';
+import * as resourcesQuery from '../../firebase/queries/queryResources';
+import withAuthorization, {authCondition} from "../auth/withAuthorization";
+import * as CommentRef from '../../firebase/refs/commentsRef';
 import PT from "prop-types";
-
-
 import "./Lecture.css";
-import { lecture } from "../constants/routes";
-
-const code = `// the array to be sorted
-var list = ['Delta', 'alpha', 'CHARLIE', 'bravo'];
-
-// temporary array holds objects with position and sort-value
-var mapped = list.map(function(el, i) {
-  return { index: i, value: el.toLowerCase() };
-})
-
-// sorting the mapped array containing the reduced values
-mapped.sort(function(a, b) {
-  if (a.value > b.value) {
-    return 1;
-  }
-  if (a.value < b.value) {
-    return -1;
-  }
-  return 0;
-});
-
-// container for the resulting order
-var result = mapped.map(function(el){
-  return list[el.index];
-});`
+import { lecture } from "../../constants/routes";
+import LectureNotes from "./Lecture-notes";
 
 class Lecture extends React.Component {
   state = {
@@ -53,31 +30,10 @@ class Lecture extends React.Component {
   render() {
     return (
       <section className="lecture columns isWhite">
-        <section className='column is-two-thirds isDark'>
-          <section className="lectureHeader title has-text-white">
-            {this.state.lecture && this.state.lecture.title}<span className="is-pulled-right subtitle has-text-white">
-              {Moment(this.state.lecture && this.state.lecture.eventDate).format("dddd Do MMMM YYYY")}
-            </span>
-            <section className="subtitle is-size-6 has-text-danger">{this.state.lecture && this.state.lecture.author}</section>
-          </section>
-
-          <section className="lectureNotes box">
-            <code className="js customScroll">{this.state.lecture && this.state.lecture.body}</code>
-          </section>
-
-        </section>
-
-          <section className='hero column is-one-third isWhite lectureRightPane'>
-            <section className='hero-head'>
-              <section className='field is-grouped'>
-                <span
-                  className={`control button is-danger is-size-7 ${this.state.commentsVisible && 'is-static'}`}
-                  onClick={() => this.toggleView(true)}>Comments</span>
-                <span
-                  className={`control button is-danger is-size-7 ${ !this.state.commentsVisible && 'is-static'}`}
-                  onClick={() => this.toggleView(false)}>Resources</span>
-              </section>
-            </section>
+        {this.state.lecture && <LecNotes lecture={this.state.lecture} lectureTitle={this.state.lecture.title} lectureEventDate={this.state.lecture.eventDate} lectureAuthor={this.state.lecture.author} lectureBody={this.state.lecture.body} />}
+        
+        <section className='hero column is-one-third isWhite lectureRightPane'>
+          <LectureToggle commentsVisible={this.state.commentsVisible} toggleView={this.toggleView} />
 
             <section className='hero-body lectureRightBody isWhite customScroll'>
               <section className="">

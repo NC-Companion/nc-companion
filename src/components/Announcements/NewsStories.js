@@ -2,8 +2,8 @@ import React from "react";
 import NewsStory from "./NewsStory";
 import NewsSearch from "./News-search";
 
-import {getAllEvents} from '../firebase/queries/queryEvents';
-import {queries} from "../firebase/";
+import {getAllEvents} from '../../firebase/queries/queryEvents';
+import {queries} from "../../firebase/";
 
 import './NewsStories.css'
 
@@ -33,24 +33,11 @@ class NewsStories extends React.Component {
     })
     .catch(console.log);
   }
+
+
   render() {
     const {events, loading} = this.state;
-    // why create story ?
-    // const story = stories[storyIndex];
-    var matchedEvents = [];
-    if(events.length > 0) {
-      matchedEvents = events.filter(event => {
-        return event.tag
-          ? `${event
-            .tag
-            .join(" ")
-            .toLowerCase()} ${event
-            .title
-            .toLowerCase()}`
-            .indexOf(this.state.search) !== -1
-          : null;
-      });
-    }
+    let matchedEvents = this.searchFilter(events, matchedEvents);
 
     return (
       <section className="newsFeedBody height100 hero">
@@ -72,9 +59,26 @@ class NewsStories extends React.Component {
         .toLowerCase()
     });
   };
-// why creATed this ? map is maping through all the stories
+
   selectEvent = eventIndex => {
     this.props.viewEvent(this.state.events[eventIndex]);
+  };
+
+  searchFilter(events, matchedEvents) {
+    if (events.length > 0) {
+      matchedEvents = events.filter(event => {
+        return event.tag
+          ? `${event
+            .tag
+            .join(" ")
+            .toLowerCase()} ${event
+              .title
+              .toLowerCase()}`
+            .indexOf(this.state.search) !== -1
+          : null;
+      });
+    }
+    return matchedEvents;
   };
 }
 

@@ -4,11 +4,10 @@ import PT from "prop-types";
 class NewsStory extends React.Component {
   render() {
     const { selectEvent, title, index, imageUrl } = this.props;
-    // imageUrl is an array
-    const inlineStyle = {background: `linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)), url(${imageUrl[0]})`, backgroundSize: "cover"}
-    const altInlineStyle = {background: `rgb(255,255,255)`}
+    const inlineStyle = { background: `linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)), url(${imageUrl[0]})`, backgroundSize: "cover" }
+    const altInlineStyle = { background: `rgb(255,255,255)` }
     return (
-      <section className="newsStory box" onClick={() => {selectEvent(index)}}
+      <section className="newsStory box" onClick={() => { selectEvent(index) }}
         style={altInlineStyle}>
         <section className="" style={{ height: "80%" }} />
         <section className="newsStoryTitle">

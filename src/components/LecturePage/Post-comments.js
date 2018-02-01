@@ -1,5 +1,5 @@
 import React from 'react';
-import * as CommentRef from '../firebase/refs/commentsRef';
+import * as CommentRef from '../../firebase/refs/commentsRef';
 import PT from "prop-types";
 
 

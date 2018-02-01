@@ -9,33 +9,20 @@ class NewsStoryOverlay extends React.Component {
     return (
       <section className="overlayBody">
         <section class="hero overlay-hero is-medium">
-          <div class="hero-head">
+          <section class="hero-head">
             <nav class="navbar">
-              <div class="container has-text-centered"></div>
+              <section class="container has-text-centered"></section>
             </nav>
-          </div>
+          </section>
 
-          <div class="hero-body">
-            <div class="container has-text-left">
+          <section class="hero-body">
+            <section class="container has-text-left">
               <section className='box hero overlay-body isDark'>
 
                 <section className='hero-head title has-text-white'>
                   <section className='columns'>
                     <section className='column is-four-fifths is-size-4'>
-                    {console.log(this.props.event)}
                       <section>{this.props.event.title}</section>
-                      {/* <section>{this.props.event.author.length && <span className='has-text-danger is-size-6'>
-                          By {this
-                            .props
-                            .event
-                            .author
-                            .split(',')[1]}
-                          {' '}{this
-                            .props
-                            .event
-                            .author
-                            .split(',')[0]}
-                        </span>}</section> */}
                     </section>
                     <section className='column is-one-fifths'>
                       <span
@@ -54,9 +41,9 @@ class NewsStoryOverlay extends React.Component {
                     <span className='section is-size-6'>{this.props.event.body}</span>
                   </section>
                 </section>
-                <div class="hero-foot">
+                <section class="hero-foot">
                   <nav class="tabs">
-                    <div class="container">
+                    <section class="container">
                       <ul>
                         {this.props.event.tag.length && this
                           .props
@@ -66,12 +53,12 @@ class NewsStoryOverlay extends React.Component {
                             <a className="has-text-danger">#{tag}</a>
                           </li>)}
                       </ul>
-                    </div>
+                    </section>
                   </nav>
-                </div>
+                </section>
               </section>
-            </div>
-          </div>
+            </section>
+          </section>
         </section>
       </section>
     );

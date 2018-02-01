@@ -1,10 +1,10 @@
 import React from "react";
 import Moment from "moment";
 import "./Weather.css";
-import Cloudy from "../weather-icons/cloudy.svg";
-import Clear from "../weather-icons/day.svg";
-import Rainy from "../weather-icons/rainy-6.svg";
-import fetchWeather from "../helpers/fetchWeather";
+import Cloudy from "../../weather-icons/cloudy.svg";
+import Clear from "../../weather-icons/day.svg";
+import Rainy from "../../weather-icons/rainy-6.svg";
+import fetchWeather from "../../helpers/fetchWeather";
 
 class Weather extends React.Component {
   state = {
