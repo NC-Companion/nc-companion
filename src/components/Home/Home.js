@@ -1,8 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import withAuthorization, { authCondition } from "../auth/withAuthorization";
-import NewsSearch from "../Announcements/News-search";
 import NewsStories from "../Announcements/NewsStories";
 import NewsStoryOverlay from "../Announcements/NewsStoryOverlay";
 import WelcomeMessage from './Welcome-message';
@@ -14,7 +12,7 @@ import {whiteBoard} from '../../firebase/queries/queryEvents';
 import fetchQuote from "../../helpers/fetchQuote";
 import "./Home.css";
 
-import randomEventGenerator from '../../seed/seedEvents';
+// import randomEventGenerator from '../../seed/seedEvents';
 
 class Home extends React.Component {
   state = {

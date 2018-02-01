@@ -11,7 +11,7 @@ export const getEventResources = (id) => {
       const res = snap.val();
       const resources = [];
       return Promise.all(Object.keys(res).map(key => {
-        resources.push(res[key]);
+        return resources.push(res[key]);
       }))
       .then(()=>{
         return resources;

@@ -35,10 +35,9 @@ class Weather extends React.Component {
             <section className="weather control is-pulled-right">
               <span>
                 {this.state.weather.main && (
-                  <img src={this.showWeatherIcon(this.state.weather.main)} />
+                  <img src={this.showWeatherIcon(this.state.weather.main)} alt="weather" />
                 )}
               </span>
-              {/* <span className="subtitle is-4">{this.state.weather.main && this.state.weather.main}</span> */}
               <span className="subtitle is-4">
                 {this.state.weather.temp && this.state.weather.temp}°C
               </span>

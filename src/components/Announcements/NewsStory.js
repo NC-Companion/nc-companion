@@ -3,8 +3,8 @@ import PT from "prop-types";
 
 class NewsStory extends React.Component {
   render() {
-    const { selectEvent, title, index, imageUrl } = this.props;
-    const inlineStyle = { background: `linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)), url(${imageUrl[0]})`, backgroundSize: "cover" }
+    const { selectEvent, title, index } = this.props;
+    // const inlineStyle = { background: `linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)), url(${imageUrl[0]})`, backgroundSize: "cover" }
     const altInlineStyle = { background: `rgb(255,255,255)` }
     return (
       <section className="newsStory box" onClick={() => { selectEvent(index) }}

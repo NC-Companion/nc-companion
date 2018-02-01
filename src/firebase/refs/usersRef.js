@@ -1,5 +1,4 @@
 import { db } from "../firebase";
-import * as queryUsers from '../queries/queryUsers';
 
 
 export const addNewUser = (id, data) => {

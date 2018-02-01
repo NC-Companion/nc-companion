@@ -5,7 +5,6 @@ import './NewsStoryOverlay.css'
 
 class NewsStoryOverlay extends React.Component {
   render() {
-    const {title, img_url, author, tags, body} = this.props;
     return (
       <section className="overlayBody">
         <section class="hero overlay-hero is-medium">
@@ -35,7 +34,7 @@ class NewsStoryOverlay extends React.Component {
                 </section>
                 <section className='hero-body box columns'>
                   <section className='column'>
-                    <img src={this.props.event.img_url}/>
+                    <img src={this.props.event.img_url} alt="storyImage"/>
                   </section>
                   <section className='column'>
                     <span className='section is-size-6'>{this.props.event.body}</span>

@@ -1,7 +1,6 @@
 import React from 'react';
 import Moment from 'moment';
 import CommentVoter from './Comment-voter';
-import Deletecomment from './Delete-comment';
 import DeleteComment from './Delete-comment';
 import PT from "prop-types";
 
@@ -15,7 +14,7 @@ class Comments extends React.Component {
             < article className="media" >
                 <figure className="media-left">
                     <p className="image is-64x64">
-                        <img src={this.props.comment.user.avatarUrl} />
+                        <img src={this.props.comment.user.avatarUrl} alt="user" />
                     </p>
                 </figure>
                 <section class="media-content" style={{ overflow: 'hidden' }}>
@@ -40,7 +39,7 @@ class Comments extends React.Component {
 
     haseebHandler = (handle) => {
         if (handle === '@null') return handle = 'Haseeb The Educator';
-        else return handle = handle;
+        else return handle;
     }
 }
 

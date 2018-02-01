@@ -1,8 +1,7 @@
 import React from "react";
-import PT from "prop-types";
-import { Link } from "react-router-dom";
 import validateEmail from "../../helpers/email-validation";
 import validatePassword from "../../helpers/password-validation";
+import PT from "prop-types";
 
 const AdminSignIn = ({ toggleStudentSignIn }) => (
   <section className="adminDetails">

@@ -1,5 +1,4 @@
 import React from "react";
-import Moment from "moment";
 import LecNotes from './Lecture-notes';
 import LectureToggle from './Lecture-toggle';
 import Comments from "./Comments";
@@ -11,8 +10,6 @@ import withAuthorization, {authCondition} from "../auth/withAuthorization";
 import * as CommentRef from '../../firebase/refs/commentsRef';
 import PT from "prop-types";
 import "./Lecture.css";
-import { lecture } from "../../constants/routes";
-import LectureNotes from "./Lecture-notes";
 
 class Lecture extends React.Component {
   state = {
