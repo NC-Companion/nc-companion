@@ -1,9 +1,10 @@
 import React from 'react';
+import './Not-found.css';
 
 const NotFound = () => (
-  <section className="hero is-danger">
-    <h1 className="title">404</h1>
-    <h2 className="subtitle">We are sorry but the page you are looking for does not exist.</h2>
+  <section className="hero is-large is-white" id="notFound">
+    <h1 className="title is-size-1">404</h1>
+    <img className="gif" src="/gifs/giphy.gif"/>
   </section>
 )
 

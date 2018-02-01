@@ -1,0 +1,10 @@
+#notFound {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  size: 100%;
+  background-size: 100%;
+  background-color: white;
+  height: 99%;
+}
