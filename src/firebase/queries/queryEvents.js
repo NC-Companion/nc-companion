@@ -86,7 +86,7 @@ export const calendarEvents = (userId) => {
       return Promise.all(Object.keys(snap.val()).map(event => {
         const date = Moment(events[event].eventDate).format('DDMMYYYY');
         let type, isLecture;
-        events[event].mandatory === 'true' 
+        events[event].mandatory === true 
         ? type = 'mandatory'
         : type = 'optional'
         events[event].type === 'lecture' 
@@ -107,11 +107,11 @@ export const calendarEvents = (userId) => {
               dueDate: events[event].eventDate,
               calendar: events[event].calendar,
               resourcesID: events[event].resources,
-              author: name || 'Anonymous',
+              author: events[event].author || 'NC Admin',
               isLecture: isLecture,
               commentID: ''
             }
-            if (obj.calendar === 'student') {
+            if (obj.calendar === 'user') {
               if (student[date]) {
                 student[date].push(obj)
               } else {

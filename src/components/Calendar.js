@@ -22,6 +22,7 @@ class Calendar extends React.Component {
       global: [],
       user: []
     },
+
     displayEvent: {},
     cohortCalendar: {
     },
@@ -31,14 +32,12 @@ class Calendar extends React.Component {
     }
   };;
 
-  componentWillReceiveProps(newProps){
-    console.log(newProps);
-  }
-
   componentDidMount() {
     calendarEvents().then(res => {this.setState({
-      cohortCalendar: res.cohort
-    }); console.log(res)})
+      cohortCalendar: res.cohort,
+      globalCalendar: res.global,
+      userCalendar: res.student,
+    })})
   }
 
   render() {
@@ -145,12 +144,11 @@ class Calendar extends React.Component {
 
   dateCell = date => {
     const key = Moment(date).format("DDMMYYYY");
+    const allCalendars = Object.keys(this.state.cohortCalendar).concat(Object.keys(this.state.globalCalendar)).concat(Object.keys(this.state.userCalendar))
     return (
       <section className="cellContent is-pulled-right">
         <section>{Moment(date).format("D")}</section>
-        {Object
-          .keys(this.state.cohortCalendar)
-          .includes(key) && this.retriveCellVal(key)}
+        {allCalendars.includes(key) && this.retriveCellVal(key)}
       </section>
     );
   };
@@ -161,6 +159,10 @@ class Calendar extends React.Component {
     const DateOnGlobalCal = this.state.globalCalendar[date];
     const DateOnCohortCal = this.state.cohortCalendar[date];
     const DateOnUserCal = this.state.userCalendar[date];
+
+    // const dateGlobalCal = this.state.globalCalendar[Moment(date).format('DDMMYYYY')];
+    // const dateCohortCal = this.state.cohortCalendar[Moment(date).format('DDMMYYYY')];
+    // const dateUserCal = this.state.userCalendar[Moment(date).format('DDMMYYYY')];
 
     if (DateOnGlobalCal) DateOnAllCalendars = DateOnAllCalendars.concat(DateOnGlobalCal);
     if (DateOnCohortCal) DateOnAllCalendars = DateOnAllCalendars.concat(DateOnCohortCal);
@@ -174,7 +176,7 @@ class Calendar extends React.Component {
       .filter(eve => eve.isLecture === true)
       .length;
     const Optional = DateOnAllCalendars
-      .filter(eve => eve.type === 'optional')
+      .filter(eve => (eve.type === 'optional' && eve.isLecture === false))
       .length
     const Mandatory = DateOnAllCalendars
       .filter(eve => (eve.type === 'mandatory' && !eve.isLecture))

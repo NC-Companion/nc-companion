@@ -7,7 +7,6 @@ import './CalendarOverlay.css'
 class CalendarOverlay extends React.Component {
 
   state = {
-    optional: true,
     mandatory: true,
     global: true,
     cohort: true,
@@ -44,7 +43,11 @@ class CalendarOverlay extends React.Component {
                     </section>
                   </section>
                 </section>
-                <section className='hero-body' style={{height: '40%'}}>
+                <section
+                  className='hero-body'
+                  style={{
+                  height: '40%'
+                }}>
                   <section
                     className='section is-size-6 customScroll'
                     style={{
@@ -57,23 +60,26 @@ class CalendarOverlay extends React.Component {
                       .concat(info.global)
                       .concat(info.user)
                       .map(event => {
-                        return (this.state[event.calendar] || this.state[event.type]) && 
-                        <Link to={event.isLecture && `/lecture/${event.uid}`} stuff='aaron' ><section className={`box notification isHover is-${this.parentCalendar(event.calendar)}`} onClick={() => this.props.displayEvent(event)}>
-                          <section>
-                            <section className='is-size-4 has-text-weight-bold columns'>
-                              <span className='column is-four-fifths'>{event.title}</span>
-                              <span className='column is-one-fifths'>
-                                <span className='is-pulled-right'>{Moment(event.dueDate).format('HH:MM')}</span>
-                              </span>
-                            </section>
-                            <section className='is-capitalized has-text-weight-bold'>
-                              <span className='has-text-black'>{event.isLecture
-                                  ? 'Lecture'
-                                  : event.type}</span>
-                              <span className='is-pulled-right'>{event.author}</span>
+                        return this.state[event.calendar] && <Link to={event.isLecture && `/lecture/${event.uid}`} stuff='aaron'>
+                          <section
+                            className={`box isHover eventTile notification is-${this.parentCalendar(event.calendar)}`}
+                            onClick={() => this.props.displayEvent(event)}>
+                            <section>
+                              <section className='is-size-4 has-text-weight-bold columns'>
+                                <span className='column is-four-fifths'>{event.title}</span>
+                                <span className='column is-one-fifths'>
+                                  <span className='is-pulled-right'>{Moment(event.dueDate).format('hh:mm')}</span>
+                                </span>
+                              </section>
+                              <section className='is-capitalized has-text-weight-bold'>
+                                <span className='has-text-black'>{event.isLecture
+                                    ? 'Lecture'
+                                    : event.type}</span>
+                                <span className='is-pulled-right'>{event.author}</span>
+                              </section>
                             </section>
                           </section>
-                        </section></Link>
+                        </Link>
                       })}
                   </section>
                 </section>
@@ -82,14 +88,7 @@ class CalendarOverlay extends React.Component {
                     <div class="container">
                       <ul className='field is-grouped'>
                         <li className='control'>
-                          <a className='has-text-white'>Mandatory</a>
-                        </li>
-                        <li className='control'>
-                          <a
-                            className={`is-danger button ${this.state.optional
-                            ? ''
-                            : 'is-outlined'}`}
-                            onClick={() => this.toggleCondition('optional')}>Optional</a>
+                          <a className='has-text-white'>Filters</a>
                         </li>
                       </ul>
                     </div>
@@ -122,6 +121,7 @@ class CalendarOverlay extends React.Component {
     );
   }
   parentCalendar = calendar => {
+    console.log(calendar)
     if (calendar === 'global') 
       return 'primary';
     else if (calendar === 'cohort') 
@@ -142,10 +142,6 @@ class CalendarOverlay extends React.Component {
     else if (condition === 'user') 
       this.setState({
         user: !this.state.user
-      });
-    else if (condition === 'optional') 
-      this.setState({
-        optional: !this.state.optional
       });
     }
   
