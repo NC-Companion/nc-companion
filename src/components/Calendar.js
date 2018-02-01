@@ -33,11 +33,11 @@ class Calendar extends React.Component {
   };;
 
   componentDidMount() {
-    calendarEvents(this.props.authUser.uid).then(res => {this.setState({
+    calendarEvents(this.props.authUser.uid , (err,res) => {this.setState({
       cohortCalendar: res.cohort,
       globalCalendar: res.global,
       userCalendar: res.student,
-    })})
+    }); console.log(res)})
   }
 
   render() {
