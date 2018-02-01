@@ -34,7 +34,7 @@ class NewsStoryOverlay extends React.Component {
                 </section>
                 <section className='hero-body box columns'>
                   <section className='column'>
-                    <img src={this.props.event.img_url} alt="storyImage"/>
+                    <img src={this.props.event.imageUrl[0]} alt="storyImage"/>
                   </section>
                   <section className='column'>
                     <span className='section is-size-6'>{this.props.event.body}</span>
