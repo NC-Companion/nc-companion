@@ -25,10 +25,12 @@ class Home extends React.Component {
   };
 
   componentDidMount() {
-    whiteBoard(res => {
-      console.log('***', res);
+    whiteBoard()
+    .then(res => {
+      // console.log('***', res);
       this.setState({board:res});
     })
+    .catch(console.log);
       
     fetchQuote().then(res =>
       this.setState({

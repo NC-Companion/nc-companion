@@ -4,11 +4,12 @@ import Moment from 'moment'
 export const getAllEvents = done => {
   return db.ref("/events").once("value");
 };
-export const whiteBoard = (done) => {
+export const whiteBoard = () => {
   let today = new Date(Date.now()).toISOString();
   const board = [];
   today = Moment(today).format('DDMMYYYY')
-  return db.ref("/events").on("value", events => {
+  return db.ref("/events").once("value")
+  .then(events => {
       events = events.val();
       return Promise.all(Object.keys(events).map(event =>{
         let eventDate = Moment(events[event].eventDate).format('DDMMYYYY');
@@ -25,11 +26,8 @@ export const whiteBoard = (done) => {
         }
 
       }))
-      .then(()=>{
-        const sortedBoard = board.sort((a,b) => {
-          return a.time < b.time;
-        });
-        done(sortedBoard);
+      .then(()=>{        
+        return board;
       })
     })
   // return db.ref("/events").orderByChild('eventDate').equalTo(date1).once("value");
@@ -76,14 +74,13 @@ export const listenForLectureData = (eventId, done) => {
     })
 }
 
-export const calendarEvents = (userId,done) => {  
+export const calendarEvents = (userId) => {  
   const data = {};
   const student = {};
   const global = {};
   const cohort = {};
-
-
-  return db.ref("/events").on("value", snap => {
+  return db.ref('/events').once("value")
+    .then(snap => {
       const events = snap.val();
       return Promise.all(Object.keys(snap.val()).map(event => {
         const date = Moment(events[event].eventDate).format('DDMMYYYY');
@@ -136,9 +133,9 @@ export const calendarEvents = (userId,done) => {
             }            
           })  // users snap          
       }))     // Object.keys MAP
-      .then(() => {
-        done(null,{student,cohort,global})
-      })
-      .catch(()=>done(new Error('Server Crashes !')))
     })    //  Evnets snap
+    .then(() => {
+      return ({student,cohort,global})
+    })
+    
 }
