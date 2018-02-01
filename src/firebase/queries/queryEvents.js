@@ -113,7 +113,7 @@ export const calendarEvents = (done) => {
               isLecture: isLecture,
               commentID: ''
             }
-            if (obj.calendar === 'user') {
+            if (obj.calendar === userId) {
               if (student[date]) {
                 student[date].push(obj)
               } else {

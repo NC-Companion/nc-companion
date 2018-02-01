@@ -33,20 +33,17 @@ class Calendar extends React.Component {
   };;
 
   componentDidMount() {
-    calendarEvents((err,res) => {
-      if(err) throw err;
-      this.setState({
-        cohortCalendar: res.cohort,
-        globalCalendar: res.global,
-        userCalendar: res.student,
-      })
-    })
+    calendarEvents(this.props.authUser.uid).then(res => {this.setState({
+      cohortCalendar: res.cohort,
+      globalCalendar: res.global,
+      userCalendar: res.student,
+    })})
   }
 
   render() {
     return (
       <section className="calendar columns">
-        {this.state.CalOverlay.date && <CalendarOverlay info={this.state.CalOverlay} onDeselect={this.onDeselect} displayEvent={this.setDisplayEvent}/>}
+        {this.state.CalOverlay.date && <CalendarOverlay info={this.state.CalOverlay} userID={this.props.authUser.uid} onDeselect={this.onDeselect} displayEvent={this.setDisplayEvent}/>}
         <section className='column is-two-thirds isDark calendarLeftPane'>
           <section className='calendarNav'>
             <section className='calNavSection columns'>

@@ -13,6 +13,12 @@ class CalendarOverlay extends React.Component {
     user: true
   }
 
+  componentDidMount() {
+    const temp = {};
+    temp[`${this.props.userID}`] = true;
+    this.setState(temp)
+  }
+
   render() {
     const {events, onDeselect, info} = this.props;
     console.log(info)
@@ -121,12 +127,11 @@ class CalendarOverlay extends React.Component {
     );
   }
   parentCalendar = calendar => {
-    console.log(calendar)
     if (calendar === 'global') 
       return 'primary';
     else if (calendar === 'cohort') 
       return 'success';
-    else if (calendar === 'user') 
+    else if (calendar === `${this.props.userID}`) 
       return 'warning';
     }
   
@@ -139,12 +144,13 @@ class CalendarOverlay extends React.Component {
       this.setState({
         cohort: !this.state.cohort
       });
-    else if (condition === 'user') 
-      this.setState({
-        user: !this.state.user
-      });
+    else if (condition === 'user') {
+      const temp = {}
+      temp[`${this.props.userID}`] = !this.state[`${this.props.userID}`]
+      this.setState(temp);
     }
-  
+  }
+
 }
 
 export default CalendarOverlay;

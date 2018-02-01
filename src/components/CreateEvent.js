@@ -16,7 +16,7 @@ class CreateEvent extends React.Component {
         time: '',
         imageUrl: [],
         isLecture: false,
-        mandatory: true,
+        mandatory: false,
         resources: [],
         tag: [],
         title: ''
@@ -73,8 +73,7 @@ class CreateEvent extends React.Component {
                                     label="Calendar"
                                     onBlur={res => this.setState({calendar: res})}
                                     inputId='calendar'
-                                    required={true}
-                                    placeholder='Where would you like to post to?.'
+                                    placeholder='Where would you like to post to?. - Leave blank to make it personal!'
                                     icon='fas fa-calendar-plus'/>
 
                                 <section className='columns'>
@@ -208,7 +207,7 @@ class CreateEvent extends React.Component {
             author: event.author,
             authorUid: this.props.authUser.uid,
             body: event.body,
-            calendar: event.calendar,
+            calendar: event.calendar || this.props.authUser.uid,
             creationDate: Moment().format(),
             eventDate: `${event.date}T${event.time}:00+00:00`,
             imageUrl: event.imageUrl,
