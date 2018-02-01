@@ -16,9 +16,8 @@ export const whiteBoard = () => {
         if (eventDate === today) {
           if( events[event].mandatory === 'true' || true)
           {
-            // console.log('matched');
             let obj = {
-              time : Moment(events[event].eventDate).format('H:MM'),
+              time : Moment(events[event].eventDate).format('H:mm'),
               body : events[event].title
             }
             board.push(obj);
