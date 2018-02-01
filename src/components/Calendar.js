@@ -33,11 +33,14 @@ class Calendar extends React.Component {
   };;
 
   componentDidMount() {
-    calendarEvents().then(res => {this.setState({
-      cohortCalendar: res.cohort,
-      globalCalendar: res.global,
-      userCalendar: res.student,
-    })})
+    calendarEvents((err,res) => {
+      if(err) throw err;
+      this.setState({
+        cohortCalendar: res.cohort,
+        globalCalendar: res.global,
+        userCalendar: res.student,
+      })
+    })
   }
 
   render() {

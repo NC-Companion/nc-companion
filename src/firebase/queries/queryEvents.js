@@ -17,7 +17,7 @@ export const whiteBoard = (done) => {
           {
             console.log('matched');
             let obj = {
-              time : Moment(events[event].eventDate).format('LT'),
+              time : Moment(events[event].eventDate).format('H:MM'),
               body : events[event].title
             }
             board.push(obj);
@@ -26,7 +26,10 @@ export const whiteBoard = (done) => {
 
       }))
       .then(()=>{
-        done(board);
+        const sortedBoard = board.sort((a,b) => {
+          return a.time < b.time;
+        });
+        done(sortedBoard);
       })
     })
   // return db.ref("/events").orderByChild('eventDate').equalTo(date1).once("value");
@@ -73,15 +76,14 @@ export const listenForLectureData = (eventId, done) => {
     })
 }
 
-export const calendarEvents = (userId) => {  
+export const calendarEvents = (done) => {  
   const data = {};
   const student = {};
   const global = {};
   const cohort = {};
 
 
-  return db.ref("/events").once("value")
-    .then(snap => {
+  return db.ref("/events").on("value", snap => {
       const events = snap.val();
       return Promise.all(Object.keys(snap.val()).map(event => {
         const date = Moment(events[event].eventDate).format('DDMMYYYY');
@@ -134,7 +136,9 @@ export const calendarEvents = (userId) => {
             }            
           })  // users snap          
       }))     // Object.keys MAP
+      .then(() => {
+        done(null,{student,cohort,global})
+      })
+      .catch(()=>done(new Error('Server Crashes !')))
     })    //  Evnets snap
-    .then(()=>{return {student,cohort,global}})
-    .catch(console.log);
 }
