@@ -1,0 +1,15 @@
+.createEvent{
+    margin: auto;
+    height: 100%;
+}
+
+#messageInput{
+    height: 2.25em;
+    resize: none;
+    transition: height 2s ease;
+}
+
+#messageInput:focus{
+    height: 13.25em;
+    transition: height 2s ease;
+}

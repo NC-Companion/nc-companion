@@ -1,3 +1,4 @@
+export const create_event = "/create_event";
 export const calendar = "/calendar";
 export const account = "/account";
 export const home = "/home";

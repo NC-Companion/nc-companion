@@ -12,10 +12,10 @@ import AdminSignIn from "./AdminSignIn";
 import Calendar from "./Calendar";
 import Home from "./Home";
 import NewsStories from "./NewsStories";
-import CreateNews from "./CreateNews";
 import Lecture from "./Lecture";
 import SignInForm from "./SignInForm";
 import NotFound from './Not-found';
+import CreateEvent from './CreateEvent';
 
 class App extends React.Component {
   render() {
@@ -31,6 +31,10 @@ class App extends React.Component {
               <Route
                 path={routes.account}
                 render={() => <Account authUser={authUser} />}
+              />
+              <Route
+                path={routes.create_event}
+                render={() => <CreateEvent authUser={authUser} />}
               />
               <Route
                 exact

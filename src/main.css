@@ -28,6 +28,11 @@ body{
   height: 50%
 }
 
+.noTBPadding{
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .customScroll{
   overflow-y: scroll;
 }

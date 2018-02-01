@@ -1,12 +1,12 @@
 import { db } from "../firebase";
 
-export const postNewEvent = (data, done) => {
-  for (let key in data) {
-    if(key !== 'imageUrl' && !data[key]) {
-      return done(`Please provide '${key}'`)
-    }
-  }
-  db.ref('/events').push(data);
+export const postNewEvent = (data) => {
+  // for (let key in data) {
+  //   if(key !== 'imageUrl' && !data[key]) {
+  //     return done(`Please provide '${key}'`)
+  //   }
+  // }
+  return db.ref('/events').push(data);
 }
 
 export const updateEvent = (eventId, update) => {
