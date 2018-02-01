@@ -12,11 +12,21 @@ export const postNewComment = (data, done) => {
   return done('Success');
 }
 
-export const voteComment = (commentId, change) => {
+export const voteComment = (commentId,authUser) => {
   return queryComments.getCommentById(commentId)
     .then(snap => {
+      const user = snap.val().likedBy[authUser.uid];
+      console.log('snap.val().likedBy',user);
+
       let currentVotes = snap.val().votes;
-     return db.ref("/comments").child(commentId).update({votes:currentVotes + change});
+      if(user) {
+        db.ref("/comments").child(commentId).update({votes:currentVotes - 1});
+        db.ref(`/comments/${commentId}/likedBy/${authUser.uid}`).remove();
+      } else {        
+        let likedBy = snap.val().likedBy; 
+        likedBy[authUser.uid] = {name:authUser.displayName,uid:authUser.uid}       
+        return db.ref("/comments").child(commentId).update({votes:currentVotes + 1,likedBy });
+      }
     })
     .catch(console.log);
 }

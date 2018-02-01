@@ -27,7 +27,9 @@ class Comments extends React.Component {
                             <small>   {Moment(this.props.comment.comment.creationDate).fromNow()}</small>
                             <section className='is-size-6'>{this.props.comment.comment.body}</section>
                         </p>
-                        <CommentVoter comment={this.props.comment} />
+
+                    <CommentVoter comment={this.props.comment} authUser={this.props.authUser}/>
+
                     </section>
                 </section>
                 {this.props.comment.user.id === this.props.authUser.uid ? <DeleteComment deleteUserComment={this.props.deleteUserComment} index={this.props.index} /> : null}

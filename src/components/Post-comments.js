@@ -45,7 +45,8 @@ class PostComments extends React.Component {
       eventId: this.props.eventId,
       userId: this.props.userId,
       creationDate: new Date(Date.now()).toISOString(),
-      votes: 0
+      votes: 0,
+      likedBy : {start: 'start'}
     }
     CommentRef.postNewComment(comment, res => { res==='Success' ? this.setState({comment: ''}) : null });
     
